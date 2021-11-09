@@ -1,16 +1,173 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Oxygen&display=swap');
 
-a {
-  color: inherit;
-  text-decoration: none;
+html,
+body,
+#__next {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+        Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    height: 100%;
+    width: 100%;
 }
 
 * {
-  box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Oxygen', sans-serif;
+}
+
+:root {
+    /* Colors */
+    --clr-primary: hsla(144, 44%, 55%, 1);
+    --clr-primary-translucent: hsla(144, 44%, 55%, 0.6);
+    --clr-dark: hsla(178, 28%, 18%, 1);
+    --clr-dark-translucent: hsla(178, 28%, 18%, 0.5);
+    --clr-white: hsla(0, 0%, 99%, 1);
+    --clr-white-translucent: hsla(0, 0%, 99%, 0.5);
+    --clr-black: hsla(0, 2%, 11%, 1);
+    --clr-black-translucent: hsla(0, 2%, 11%, 0.6);
+
+    /* Fonts */
+    --font-heading: 'Nunito', sans-serif;
+    --font-basic: 'Oxygen', sans-serif;
+}
+
+a {
+    color: var(--clr-primary);
+    text-decoration: none;
+}
+
+.background-black {
+    background-color: var(--clr-black);
+}
+
+.background-black-translucent {
+    background-color: var(--clr-black-translucent);
+}
+
+.background-white {
+    background-color: var(--clr-white);
+}
+
+.background-white-translucent {
+    background-color: var(--clr-white-translucent);
+}
+
+.background-dark {
+    background-color: var(--clr-dark);
+}
+
+.background-dark-translucent {
+    background-color: var(--clr-dark-translucent);
+}
+
+.background-primary {
+    background-color: var(--clr-primary);
+}
+
+.background-primary-traslucent {
+    background-color: var(--primary-translucent);
+}
+
+.foreground-black {
+    color: var(--clr-black);
+}
+
+.foreground-white {
+    color: var(--clr-white);
+}
+
+.foreground-dark {
+    color: var(--clr-dark);
+}
+
+.foreground-primary {
+    color: var(--clr-primary);
+}
+
+.heading-font {
+    font-family: var(--font-heading);
+}
+
+.normal-font {
+    font-family: var(--font-basic);
+}
+
+.heading-text {
+    font-family: var(--font-heading);
+    font-size: 2.75rem;
+    font-weight: 600;
+    letter-spacing: 0.25rem;
+    text-transform: capitalize;
+}
+
+.subheading-text {
+    font-family: var(--heading-font);
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.normal-text {
+    font-family: var(--font-basic);
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+@media (max-width: 800px) {
+    .heading-text {
+        font-size: 2rem;
+    }
+
+    .subheading-text {
+        font-size: 1.5rem;
+    }
+}
+
+.uppercase-text {
+    text-transform: uppercase;
+}
+
+.lowercase-text {
+    text-transform: lowercase;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.border-radius-10 {
+    border-radius: 10px;
+}
+
+.border-radius-5 {
+    border-radius: 5px;
+}
+
+.glass-effect {
+    backdrop-filter: blur(2.5px);
+    -webkit-backdrop-filter: blur(2.5px);
+    box-shadow: 0 8px 32px 0 var(--primary-translucent);
+}
+
+.btn {
+    font-size: 1.5rem;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    text-align: center;
+    width: 75%;
+    padding: 2.5%;
+    border: none;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.btn:hover {
+    animation: pulse 1s;
+    box-shadow: 0 0 0 2rem hsla(0, 2%, 11%, 0);
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 var(--clr-primary-translucent);
+    }
 }
