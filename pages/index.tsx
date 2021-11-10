@@ -10,6 +10,7 @@ const Home: NextPage = () => {
             <Head>
                 <title>FIRe | Home</title>
                 <meta name='keywords' content='e-fir' />
+                <link rel='shortcut icon' href='/logo.svg' />
             </Head>
             <div id={styles.home}>
                 <div className={styles.direction}>
