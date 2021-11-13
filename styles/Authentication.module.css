@@ -1,0 +1,118 @@
+#authPage {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+
+#login {
+    display: flex;
+    height: 85%;
+    width: 75%;
+    overflow: hidden;
+    background-color: var(--clr-black-translucent);
+    position: relative;
+}
+
+#designSide {
+    background-color: var(--clr-primary-translucent);
+    position: absolute;
+    z-index: 50;
+    width: 50%;
+    height: 100%;
+    transform: translate(0%, 0);
+    transition: 0.8s ease-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#designSide.registerActive {
+    transform: translate(100%, 0);
+}
+
+.headingText {
+    color: var(--clr-white);
+    font-family: var(--font-heading);
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: 0.5rem;
+    width: 100%;
+    text-align: center;
+    transition: 0.8s ease-out;
+}
+
+#designSide.loginActive .headingText.headingText1 {
+    margin-right: 25%;
+}
+
+#designSide.loginActive .headingText.headingText2 {
+    margin-left: 25%;
+}
+
+#designSide.registerActive .headingText.headingText1 {
+    margin-left: 25%;
+}
+
+#designSide.registerActive .headingText.headingText2 {
+    margin-right: 25%;
+}
+
+#loginSide,
+#registerSide {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    transform: translate(0%, 0);
+    opacity: 1;
+    transition: all 0.8s ease-out;
+    pointer-events: all;
+}
+
+#loginSide.registerActive {
+    transform: translate(-100%, 0);
+    opacity: 0;
+    pointer-events: none;
+}
+
+#registerSide.loginActive {
+    transform: translate(100%, 0);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.inputText {
+    background-color: var(--clr-white-translucent);
+    padding: 1rem 1.5rem;
+    margin: 0.5rem 0;
+    width: 100%;
+    font-size: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    outline: 3px solid transparent;
+    transition: all 0.7s;
+}
+
+.inputText::placeholder {
+    color: var(--clr-white);
+}
+
+.inputText:focus {
+    outline: 3px solid var(--clr-primary);
+}
+
+.authForm {
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.changeFormBtn {
+    font-size: 1.25rem;
+    padding: 0.5rem 1.75rem;
+}

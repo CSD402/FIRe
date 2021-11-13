@@ -23,10 +23,10 @@ const Home: NextPage = () => {
                     <h1 className='heading-text foreground-white center-text'>
                         How can we help you?
                     </h1>
-                    <button className='btn border-radius-10 background-primary foreground-white'>
+                    <button className='btn-pulse border-radius-10 background-primary foreground-white'>
                         POLICE
                     </button>
-                    <button className='btn border-radius-10 background-primary foreground-white'>
+                    <button className='btn-pulse border-radius-10 background-primary foreground-white'>
                         CITIZEN
                     </button>
                 </div>

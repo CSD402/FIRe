@@ -37,6 +37,12 @@ a {
     text-decoration: none;
 }
 
+button:focus,
+a:focus,
+input:focus {
+    outline: none;
+}
+
 .background-black {
     background-color: var(--clr-black);
 }
@@ -96,7 +102,7 @@ a {
 .heading-text {
     font-family: var(--font-heading);
     font-size: 2.75rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.25rem;
     text-transform: capitalize;
 }
@@ -139,17 +145,17 @@ a {
     border-radius: 10px;
 }
 
-.border-radius-5 {
-    border-radius: 5px;
+.border-radius-15 {
+    border-radius: 15px;
 }
 
 .glass-effect {
     backdrop-filter: blur(2.5px);
     -webkit-backdrop-filter: blur(2.5px);
-    box-shadow: 0 8px 32px 0 var(--primary-translucent);
+    box-shadow: 0 0 16px 0 var(--clr-primary-translucent);
 }
 
-.btn {
+.btn-pulse {
     font-size: 1.5rem;
     font-family: var(--font-heading);
     font-weight: 700;
@@ -161,7 +167,7 @@ a {
     transition: 0.25s;
 }
 
-.btn:hover {
+.btn-pulse:hover {
     animation: pulse 1s;
     box-shadow: 0 0 0 2rem hsla(0, 2%, 11%, 0);
 }
@@ -170,4 +176,67 @@ a {
     0% {
         box-shadow: 0 0 0 0 var(--clr-primary-translucent);
     }
+}
+
+.submit-button {
+    background-color: var(--clr-primary);
+    color: var(--clr-white);
+    font-size: 1.5rem;
+    text-align: center;
+    border: none;
+    border-radius: 10rem;
+    outline: 3px solid transparent;
+    width: 50%;
+    padding: 0.75rem 2rem;
+    transition: all 0.7s;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    outline: 3px solid var(--clr-white);
+    /* box-shadow: 0 0 10px 2px var(--clr-primary-translucent); */
+}
+
+.submit-border {
+    border: 2.5px solid var(--clr-primary);
+    color: var(--clr-primary);
+    background-color: transparent;
+    font-size: 1.5rem;
+    text-align: center;
+    border-radius: 10rem;
+    width: 50%;
+    padding: 0.75rem 2rem;
+    transition: all 0.7s;
+    cursor: pointer;
+}
+
+.submit-border.dark {
+    border: 2.5px solid var(--clr-dark);
+    color: var(--clr-dark);
+}
+
+.submit-border:hover {
+    background-color: var(--clr-primary);
+    color: var(--clr-white);
+}
+
+.submit-border.dark:hover {
+    background-color: var(--clr-dark);
+    color: var(--clr-white);
+}
+
+.w-25 {
+    width: 25%;
+}
+
+.w-50 {
+    width: 50%;
+}
+
+.w-75 {
+    width: 75%;
+}
+
+.w-100 {
+    width: 100%;
 }
