@@ -105,6 +105,14 @@
     outline: 3px solid var(--clr-primary);
 }
 
+.inputText.error {
+    outline-color: #e63946;
+}
+
+.inputText.error:focus {
+    outline-color: #e63946;
+}
+
 .authForm {
     width: 85%;
     display: flex;

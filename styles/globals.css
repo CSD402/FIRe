@@ -91,6 +91,10 @@ input:focus {
     color: var(--clr-primary);
 }
 
+.foreground-error {
+    color: #e63946;
+}
+
 .heading-font {
     font-family: var(--font-heading);
 }
