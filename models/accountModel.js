@@ -8,7 +8,7 @@ export default {
     // 0 -> None
     // 1 -> Citizen
     // 2 -> Police
-    type: 0,
+    type: 1,
 
     logged_in: false,
     token: null,
@@ -217,8 +217,5 @@ export default {
         state.logged_in = false;
         state.token = null;
         state.client_data = {};
-    }),
-    setLoginType: action((state, type) => {
-        state.type = type;
     }),
 };

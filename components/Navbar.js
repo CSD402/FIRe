@@ -21,9 +21,6 @@ const Navbar = () => {
             <Link href='/about'>
                 <a className={styles.navLink}>About Us</a>
             </Link>
-            <Link href='/login'>
-                <a className={styles.navLink}>Login</a>
-            </Link>
         </nav>
     );
 };

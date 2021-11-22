@@ -160,8 +160,7 @@ input:focus {
 }
 
 .btn-pulse {
-    font-size: 1.5rem;
-    font-family: var(--font-heading);
+    font-size: 1.75rem;
     font-weight: 700;
     text-align: center;
     width: 75%;
