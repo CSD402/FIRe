@@ -16,12 +16,18 @@ const LoggedOutHome = () => {
             <h1 className='heading-text foreground-white center-text'>
                 How can we help you?
             </h1>
-            <button className='btn-pulse border-radius-10 background-primary foreground-white'>
+            <a
+                href='/police/login'
+                className='btn-pulse border-radius-10 background-primary foreground-white'
+            >
                 POLICE
-            </button>
-            <button className='btn-pulse border-radius-10 background-primary foreground-white'>
+            </a>
+            <a
+                href='/citizen/login'
+                className='btn-pulse border-radius-10 background-primary foreground-white'
+            >
                 CITIZEN
-            </button>
+            </a>
         </div>
     );
 };
@@ -54,18 +60,62 @@ const CitizenHome = () => {
     );
 };
 
+const SectionButton = ({ heading, data }) => {
+    return (
+        <div className={`${styles.sectionButton}`}>
+            <h1 className='heading-text foreground-dark center-text'>
+                {heading}
+            </h1>
+            <div
+                className={`heading-text background-primary foreground-white border-radius-15 center-text ${styles.sectionData}`}
+            >
+                {data}
+            </div>
+        </div>
+    );
+};
+
 const PoliceHome = () => {
     return (
-        <div className={styles.direction}>
-            <Image
-                src='/images/shield.png'
-                height={175}
-                width={175}
-                alt='Shield'
-            />
-            <h1 className='heading-text foreground-white center-text'>
-                Welcome, {'Rakesh Kumar'}
-            </h1>
+        <div className={`${styles.policeHome} background-white`}>
+            <div className={`${styles.policeIntro}`}>
+                <h1 className='heading-text foreground-dark'>
+                    Welcome, {'Rakesh Kumar'}
+                </h1>
+                <h1 className='subheading-text foreground-dark'>
+                    {'Sub-Inspector'}
+                </h1>
+            </div>
+            <div className={`${styles.policeSections}`}>
+                <SectionButton heading='Active FIRS' data={<span>6723</span>} />
+                <SectionButton
+                    heading='FIRs this month'
+                    data={<span>269</span>}
+                />
+                <SectionButton
+                    heading='Data Analytics'
+                    data={
+                        <Image
+                            src='/images/chart.png'
+                            height={250}
+                            width={475}
+                            alt='DATA'
+                        />
+                    }
+                />
+            </div>
+            <a
+                href='/police/new-fir'
+                className={`submit-button dark heading-text w-75 border-radius-15 ${styles.policeHomeButton}`}
+            >
+                FILE NEW FIR
+            </a>
+            <a
+                href='/police/review-complaints'
+                className={`submit-button dark heading-text w-75 border-radius-15 ${styles.policeHomeButton}`}
+            >
+                REVIEW COMPLAINTS
+            </a>
         </div>
     );
 };
@@ -88,7 +138,7 @@ const Home = () => {
                 ) : (
                     <LoggedOutHome />
                 )}
-                <div className={styles.map}></div>
+                {loginType === 2 ? <></> : <div className={styles.map}></div>}
             </div>
         </>
     );
