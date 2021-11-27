@@ -8,7 +8,7 @@ export default {
     // 0 -> None
     // 1 -> Citizen
     // 2 -> Police
-    type: 2,
+    type: 1,
 
     logged_in: false,
     token: null,

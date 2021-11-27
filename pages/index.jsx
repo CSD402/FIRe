@@ -2,6 +2,8 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { useStoreState } from 'easy-peasy';
 
+import CustomerCarePopup from '../components/CustomerCarePopup';
+
 import styles from '../styles/Home.module.css';
 
 const LoggedOutHome = () => {
@@ -50,9 +52,11 @@ const CitizenHome = () => {
             >
                 File Complaint
             </a>
-            <button className='btn-pulse border-radius-10 background-primary foreground-white'>
+
+            {/* <button className='btn-pulse border-radius-10 background-primary foreground-white'>
                 Customer Care
-            </button>
+            </button> */}
+            <CustomerCarePopup />
             <button className='btn-pulse border-radius-10 background-primary foreground-white'>
                 Past Complaints
             </button>
