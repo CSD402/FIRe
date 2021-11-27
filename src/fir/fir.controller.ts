@@ -1,42 +1,40 @@
 import { Body,
-    Controller,
-    Delete,
-    Get,
-    Param,
-    Post,
-    Put,
-    Query, } from '@nestjs/common';
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put, } from '@nestjs/common';
 import { FirService } from './fir.service';
 import { FirDto } from './fir.dto';
+import { Fir } from './interfaces/fir.interface';
 
 @Controller('fir')
 export class FirController {
-    constructor(private firService: FirService) {}
+    constructor(private readonly firService: FirService) {}
 
     @Get()
-    public async getFir() {
+    getFir(): Promise<Fir[]> {
       return this.firService.getFir();
     }
   
     @Post()
-    public async postFir(@Body() officer: FirDto) {
-      return this.firService.postFir(officer);
+    postFir(@Body() Firdto: FirDto): Promise<Fir> {
+      return this.firService.postFir(Firdto);
     }
   
     @Get(':id')
-    public async getFirById(@Param('id') id: string) {
+    getFirById(@Param('id') id): Promise<Fir> {
       return this.firService.getFirById(id);
     }
   
     @Delete(':id')
-    public async deleteFirrById(@Param('id') id: string) {
+    deleteFirById(@Param('id') id): Promise<Fir> {
       return this.firService.deleteFirById(id);
     }
   
     @Put(':id')
-    public async putFirById(@Param('id') id: string, @Query() query) {
-      const propertyName = query.property_name;
-      const propertyValue = query.property_value;
-      return this.firService.putFirById(id, propertyName, propertyValue);
+    putFirById(@Body() updateFirDto: FirDto, @Param('id') id): Promise<Fir> {
+      return this.firService.putFirById(id, updateFirDto);
     }
 }

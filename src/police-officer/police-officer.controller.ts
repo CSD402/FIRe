@@ -8,35 +8,34 @@ import { Body,
     Query, } from '@nestjs/common';
 import { PoliceOfficerService } from './police-officer.service';
 import { PoliceOfficerDto } from './police-officer.dto';
+import { PoliceOfficer } from './interfaces/police-officer.interface';
 
 @Controller('police-officer')
 export class PoliceOfficerController {
-    constructor(private complaintService: PoliceOfficerService) {}
+    constructor(private officerService: PoliceOfficerService) {}
 
     @Get()
-    public async getOfficer() {
-      return this.complaintService.getOfficer();
+    getFir(): Promise<PoliceOfficer[]> {
+      return this.officerService.getOfficer();
     }
   
     @Post()
-    public async postOfficer(@Body() officer: PoliceOfficerDto) {
-      return this.complaintService.postOfficer(officer);
+    postOfficer(@Body() Officerdto: PoliceOfficerDto): Promise<PoliceOfficer> {
+      return this.officerService.postOfficer(Officerdto);
     }
   
     @Get(':id')
-    public async getOfficerById(@Param('id') id: string) {
-      return this.complaintService.getOfficerById(id);
+    getOfficerById(@Param('id') id): Promise<PoliceOfficer> {
+      return this.officerService.getOfficerById(id);
     }
   
     @Delete(':id')
-    public async deleteOfficerById(@Param('id') id: string) {
-      return this.complaintService.deleteOfficerById(id);
+    deleteOfficerById(@Param('id') id): Promise<PoliceOfficer> {
+      return this.officerService.deleteOfficerById(id);
     }
   
     @Put(':id')
-    public async putOfficerById(@Param('id') id: string, @Query() query) {
-      const propertyName = query.property_name;
-      const propertyValue = query.property_value;
-      return this.complaintService.putOfficerById(id, propertyName, propertyValue);
+    putOfficerById(@Body() updateFirDto: PoliceOfficerDto, @Param('id') id): Promise<PoliceOfficer> {
+      return this.officerService.putOfficerById(id, updateFirDto);
     }
 }
