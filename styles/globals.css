@@ -23,7 +23,7 @@ body,
     --clr-dark: hsla(178, 28%, 18%, 1);
     --clr-dark-translucent: hsla(178, 28%, 18%, 0.75);
     --clr-white: hsla(0, 0%, 99%, 1);
-    --clr-white-translucent: hsla(0, 0%, 99%, 0.5);
+    --clr-white-translucent: hsla(0, 0%, 99%, 0.3);
     --clr-black: hsla(0, 2%, 11%, 1);
     --clr-black-translucent: hsla(0, 2%, 11%, 0.6);
 
@@ -41,6 +41,14 @@ button:focus,
 a:focus,
 input:focus {
     outline: none;
+}
+
+.background-glass {
+    background: radial-gradient(
+        /* 90deg, */ var(--clr-primary) 0%,
+        var(--clr-dark) 35%,
+        var(--clr-black) 100%
+    );
 }
 
 .background-black {

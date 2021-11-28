@@ -5,6 +5,7 @@ import { useStoreState } from 'easy-peasy';
 import CustomerCarePopup from '../components/CustomerCarePopup';
 
 import styles from '../styles/Home.module.css';
+import CustomBackground from '../components/CustomBackground';
 
 const LoggedOutHome = () => {
     return (
@@ -81,7 +82,9 @@ const SectionButton = ({ heading, data }) => {
 
 const PoliceHome = () => {
     return (
-        <div className={`${styles.policeHome} background-white`}>
+        <div
+            className={`${styles.policeHome} background-white-translucent glass-effect border-radius-15`}
+        >
             <div className={`${styles.policeIntro}`}>
                 <h1 className='heading-text foreground-dark'>
                     Welcome, {'Rakesh Kumar'}
@@ -138,7 +141,9 @@ const Home = () => {
                 {loginType === 1 ? (
                     <CitizenHome />
                 ) : loginType === 2 ? (
-                    <PoliceHome />
+                    <CustomBackground>
+                        <PoliceHome />
+                    </CustomBackground>
                 ) : (
                     <LoggedOutHome />
                 )}
