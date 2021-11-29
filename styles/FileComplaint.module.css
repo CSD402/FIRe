@@ -1,0 +1,95 @@
+.fileComplaint {
+    padding: 1.25%;
+    width: 95%;
+    height: 95%;
+}
+
+.form {
+    margin: 3.5% auto;
+    width: 85%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+}
+
+.inputText {
+    background-color: var(--clr-white-translucent);
+    accent-color: var(--clr-primary);
+    padding: 1.25rem 1.5rem;
+    margin: 0.75rem 0;
+    font-size: 1.25rem;
+    border: none;
+    border-radius: 0.5rem;
+    outline: 3px solid transparent;
+    transition: all 0.7s;
+    grid-column: 1;
+}
+
+.inputText::-webkit-calendar-picker-indicator {
+    filter: invert();
+}
+
+.inputText::selection {
+    color: var(--clr-primary);
+}
+
+.inputText::placeholder {
+    color: var(--clr-white);
+}
+
+.inputText:focus {
+    outline: 3px solid var(--clr-primary);
+}
+
+.inputText.error {
+    outline-color: #e63946;
+}
+
+.inputText.error:focus {
+    outline-color: #e63946;
+}
+
+.textArea {
+    grid-column: 2;
+}
+
+.textArea:first-of-type {
+    grid-row: 1/4;
+}
+
+.textArea:last-of-type {
+    grid-row: 4/6;
+}
+
+.btn {
+    grid-column: 1/3;
+    padding: 1rem 2rem;
+}
+
+.selectContainer {
+    position: relative;
+}
+
+.select {
+    width: 100%;
+    appearance: none;
+    cursor: pointer;
+}
+
+.select option {
+    border: none;
+    background-color: var(--clr-primary-translucent);
+    margin: 2rem;
+    transition: all 5s;
+}
+
+.selectIcon {
+    position: absolute;
+    top: 50%;
+    right: 2.5%;
+    transform: translate(0, -70%);
+    font-weight: 900;
+    font-size: 2.5rem;
+    color: var(--clr-white);
+    z-index: 1;
+}

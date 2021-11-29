@@ -79,8 +79,8 @@ input:focus {
     background-color: var(--clr-primary);
 }
 
-.background-primary-traslucent {
-    background-color: var(--primary-translucent);
+.background-primary-translucent {
+    background-color: var(--clr-primary-translucent);
 }
 
 .foreground-black {

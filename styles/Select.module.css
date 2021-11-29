@@ -1,0 +1,52 @@
+.select {
+    position: relative;
+    cursor: pointer;
+}
+
+.selectIcon {
+    font-weight: 900;
+    font-size: 2.5rem;
+    color: var(--clr-white);
+    position: absolute;
+    top: 50%;
+    right: 2.5%;
+    transform: translateY(-70%);
+}
+
+.options {
+    position: absolute;
+    top: 50%;
+    position: 50%;
+    opacity: 0;
+    height: calc(var(--values) * 3rem);
+    pointer-events: none;
+    transition: all 0.7s;
+}
+
+.options.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.option {
+    padding: 0.5rem 5%;
+    height: 3rem;
+    font-size: 1.25rem;
+    transition: all 0.7s;
+    outline: 3px solid transparent;
+}
+
+.option:first-of-type {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.option:last-of-type {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.option:hover {
+    background-color: var(--clr-white-translucent);
+    outline: 3px solid var(--clr-primary);
+}
