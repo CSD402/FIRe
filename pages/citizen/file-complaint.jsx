@@ -43,7 +43,7 @@ const FileComplaint = () => {
                         type='text'
                         placeholder='Select Nearest Police Station'
                     />
-                    {/* <input
+                    <input
                         required
                         className={`${styles.inputText}`}
                         style={{
@@ -51,14 +51,14 @@ const FileComplaint = () => {
                         }}
                         type='datetime-local'
                         placeholder='Select Date and Time of Incident'
-                    /> */}
+                    />
                     {/* <input
                         required
                         className={`${styles.inputText}`}
                         type='text'
                         placeholder='Choose type of Offense'
                     /> */}
-                    <div className={styles.selectContainer}>
+                    {/* <div className={styles.selectContainer}>
                         <select
                             ref={select}
                             defaultValue='0'
@@ -78,7 +78,7 @@ const FileComplaint = () => {
                             icon={faSortDown}
                             className={styles.selectIcon}
                         />
-                    </div>
+                    </div> */}
                     <Select
                         placeholder='Choose type of Offense'
                         values={[

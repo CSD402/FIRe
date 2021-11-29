@@ -58,9 +58,12 @@ const CitizenHome = () => {
                 Customer Care
             </button> */}
             <CustomerCarePopup />
-            <button className='btn-pulse border-radius-10 background-primary foreground-white'>
+            <a
+                href='/citizen/past-complaints'
+                className='btn-pulse border-radius-10 background-primary foreground-white'
+            >
                 Past Complaints
-            </button>
+            </a>
         </div>
     );
 };
