@@ -37,11 +37,19 @@ export class ComplaintController {
     return this.complaintService.deleteComplaintById(id);
   }
 
-  @Put(':id')
-  public async putComplaintById(
-    @Body() updateCompaintDto: ComplaintDto,
+  @Put('/review/:id')
+  public async putComplaintById_review(
+    // @Body() updateCompaintDto: ComplaintDto,
     @Param('id') id,
-  ): Promise<Complaint> {
-    return this.complaintService.putComplaintById(id, updateCompaintDto);
+  ): Promise<JSON> {
+    return this.complaintService.putComplaintById_review(id);
+  }
+
+  @Put('/submit/:id')
+  public async putComplaintById_submit(
+    // @Body() updateCompaintDto: ComplaintDto,
+    @Param('id') id,
+  ): Promise<JSON> {
+    return this.complaintService.putComplaintById_submit(id);
   }
 }

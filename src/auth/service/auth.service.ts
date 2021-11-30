@@ -13,8 +13,8 @@ export class AuthService {
     return this.jwtService.signAsync({ user });
   }
 
-  generateJWT_officer(officer: PoliceOfficer): string {
-    return this.jwtService.sign({ officer });
+  generateJWT_officer(officer: PoliceOfficer): Promise<string> {
+    return this.jwtService.signAsync({ officer });
   }
 
   hashPassword(password: string): string {

@@ -6,13 +6,16 @@ export const FirSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'Complaint',
     required: true,
+    immutable: true,
   },
   approved_by: {
     type: Schema.Types.ObjectId,
     ref: 'PoliceOfficer',
     required: true,
+    immutable: true,
   },
   comments: {
     type: String,
+    immutable: true,
   },
 });

@@ -1,5 +1,8 @@
+const mongoose = require('mongoose');
+const { MUUID } = require('mongooseodm-uuid');
+
 export interface Complaint {
-  id?: string;
+  _id: String;
   place_of_incident: string;
   nearest_station: String;
   date_time?: Date;
@@ -7,4 +10,5 @@ export interface Complaint {
   seen_subjects: boolean;
   suspect_desc?: string;
   comments?: string;
+  status: string;
 }

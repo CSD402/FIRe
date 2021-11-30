@@ -41,16 +41,63 @@ export class ComplaintService {
       return error;
     }
   }
-  public async putComplaintById(
+
+  public async findById(id: String): Promise<Complaint> {
+    const complaint = await this.compaintModel.findOne({ _id: id });
+    return complaint;
+  }
+
+  public async putComplaintById_review(
     id: string,
-    complaint: Complaint,
-  ): Promise<Complaint> {
-    try {
-      return await this.compaintModel.findByIdAndUpdate(id, complaint, {
-        new: true,
-      });
-    } catch (error) {
-      return error;
+    // complaint: Complaint,
+  ): Promise<JSON> {
+    var complaint = await this.findById(id);
+
+    if (complaint) {
+      try {
+        complaint.status = 'Under Review';
+
+        await this.compaintModel.findByIdAndUpdate(id, complaint, {
+          new: true,
+        });
+
+        var res = { message: 'complaint filed under review!' };
+
+        return JSON.parse(JSON.stringify(res));
+      } catch (error) {
+        return error;
+      }
+    } else {
+      var res = { message: 'complaint not present in database!' };
+
+      return JSON.parse(JSON.stringify(res));
+    }
+  }
+
+  public async putComplaintById_submit(
+    id: string,
+    // complaint: Complaint,
+  ): Promise<JSON> {
+    var complaint = await this.findById(id);
+
+    if (complaint) {
+      try {
+        complaint.status = 'FIR lodged';
+
+        await this.compaintModel.findByIdAndUpdate(id, complaint, {
+          new: true,
+        });
+
+        var res = { message: 'complaint filed as FIR!' };
+
+        return JSON.parse(JSON.stringify(res));
+      } catch (error) {
+        return error;
+      }
+    } else {
+      var res = { message: 'complaint not present in database!' };
+
+      return JSON.parse(JSON.stringify(res));
     }
   }
 }

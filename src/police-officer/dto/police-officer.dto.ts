@@ -1,5 +1,3 @@
-import { isStringObject } from 'util/types';
-
 export class PoliceOfficerDto {
   readonly id: string;
   readonly name: string;

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Fir } from './interfaces/fir.interface';
+import { Fir } from '../interfaces/fir.interface';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 

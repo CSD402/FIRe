@@ -7,13 +7,13 @@ export const PoliceOfficerSchema = new mongoose.Schema({
   },
   aadhaar: {
     type: Number,
-    required: true,
     unique: true,
+    required: true,
   },
   phone_number: {
     type: Number,
-    required: true,
     unique: true,
+    required: true,
   },
   designation: {
     type: String,

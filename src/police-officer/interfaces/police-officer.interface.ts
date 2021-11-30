@@ -1,10 +1,10 @@
 export interface PoliceOfficer {
   id?: string;
-  name: string;
-  aadhaar: number;
-  phone_number: number;
+  name: String;
+  aadhaar: Number;
+  phone_number: Number;
   designation: string;
   gender: string;
   appointed_station: string;
-  password?: String;
+  password?: string;
 }

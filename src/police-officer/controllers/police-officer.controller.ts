@@ -7,15 +7,18 @@ import {
   Post,
   Put,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { PoliceOfficerService } from '../services/police-officer.service';
 import { PoliceOfficerDto } from '../dto/police-officer.dto';
 import { PoliceOfficer } from '../interfaces/police-officer.interface';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('police-officer')
 export class PoliceOfficerController {
   constructor(private officerService: PoliceOfficerService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   getFir(): Promise<PoliceOfficer[]> {
     return this.officerService.getOfficer();
@@ -36,11 +39,11 @@ export class PoliceOfficerController {
     return this.officerService.deleteOfficerById(id);
   }
 
-  @Put(':id')
-  putOfficerById(
-    @Body() updateFirDto: PoliceOfficerDto,
-    @Param('id') id,
-  ): Promise<PoliceOfficer> {
-    return this.officerService.putOfficerById(id, updateFirDto);
-  }
+  // @Put(':id')
+  // putOfficerById(
+  //   @Body() updateFirDto: PoliceOfficerDto,
+  //   @Param('id') id,
+  // ): Promise<PoliceOfficer> {
+  //   return this.officerService.putOfficerById(id, updateFirDto);
+  // }
 }
