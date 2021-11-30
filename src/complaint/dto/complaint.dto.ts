@@ -1,7 +1,5 @@
-const { MUUID } = require('mongooseodm-uuid');
-
 export class ComplaintDto {
-  readonly _id: String;
+  readonly uid: String;
   readonly place_of_incident: string;
   readonly nearest_station: String;
   readonly date_time: Date;

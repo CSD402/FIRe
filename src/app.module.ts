@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { PoliceOfficerModule } from './police-officer/police-officer.module';
 import { FirModule } from './fir/fir.module';
@@ -9,6 +10,7 @@ import config from './config/keys';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ envFilePath: '../.env' }),
     ComplaintModule,
     AuthModule,
     FirModule,

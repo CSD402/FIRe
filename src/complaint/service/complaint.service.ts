@@ -2,6 +2,9 @@ import { Complaint } from '../interfaces/complaint.interface';
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+import { v4 as uuidv4 } from 'uuid';
+import { Types } from 'mongoose';
+import { combineAll } from 'rxjs';
 
 @Injectable()
 export class ComplaintService {
@@ -18,8 +21,11 @@ export class ComplaintService {
   }
 
   public async postComplaint(complaint: Complaint): Promise<Complaint> {
-    const newComplaint = new this.compaintModel(complaint);
     try {
+      let uid = uuidv4().slice(0, 6);
+
+      var newComplaint = new this.compaintModel(complaint);
+      console.log(newComplaint);
       return await newComplaint.save();
     } catch (error) {
       return error;
