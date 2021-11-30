@@ -17,6 +17,7 @@
     position: absolute;
     top: 50%;
     position: 50%;
+    z-index: 100;
     opacity: 0;
     height: calc(var(--values) * 3rem);
     pointer-events: none;

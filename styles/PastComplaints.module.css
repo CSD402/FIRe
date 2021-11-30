@@ -45,14 +45,34 @@
     outline-color: #e63946;
 }
 
+.filter,
 .dateInput {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.dateInput input {
-    width: 75%;
+.dateWrapper label {
+    margin-right: 1%;
+}
+
+.dateWrapper {
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    font-size: 1.75rem;
+    z-index: 25;
+    cursor: pointer;
+    color: var(--clr-white);
+}
+
+.close svg:hover {
+    color: var(--clr-error);
 }
 
 .complaints {

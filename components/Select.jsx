@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { faSortDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -9,10 +9,15 @@ const Select = ({
     values,
     defaultValue,
     classNames,
+    setValue,
     ...extra
 }) => {
     let [optionsOpen, setOptionsOpen] = useState(false);
     let [selectedValue, setSelectedValue] = useState(defaultValue);
+
+    useEffect(() => {
+        setValue(selectedValue);
+    }, [selectedValue]);
 
     return (
         <div

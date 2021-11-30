@@ -1,15 +1,18 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import CustomBackground from '../../components/CustomBackground';
 import CitizenComplaint from '../../components/CitizenComplaint';
+import Select from '../../components/Select';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import styles from '../../styles/PastComplaints.module.css';
 
 const PastComplaints = () => {
-    let complaints = [
+    let defaultComplaints = [
         {
-            date: '2021-11-19T01:55',
+            date: '2021-11-15T01:55',
             pinCode: '201314',
             id: '123456',
-            placeOfIncident: 'Sarita Vihar',
+            placeOfIncident: 'Dadri',
             slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
             details:
                 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad minus laboriosam debitis corporis hic rerum eligendi quae quasi beatae eaque excepturi asperiores a dolorum labore repudiandae assumenda eveniet quibusdam optio consequuntur voluptatum explicabo voluptates, rem alias et? Provident, non earum!',
@@ -21,7 +24,34 @@ const PastComplaints = () => {
         {
             date: '2021-11-19T01:55',
             pinCode: '201314',
-            id: '123456',
+            id: '123457',
+            placeOfIncident: 'Sarita Vihar',
+            slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+            type: 'Rape',
+            status: 'Under Review',
+        },
+        {
+            date: '2021-11-19T01:55',
+            pinCode: '201314',
+            id: '123458',
+            placeOfIncident: 'Hapur',
+            slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+            type: 'Dowry',
+            status: 'Under Review',
+        },
+        {
+            date: '2021-11-19T01:55',
+            pinCode: '201314',
+            id: '123459',
+            placeOfIncident: 'Hapur',
+            slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+            type: 'Dowry',
+            status: 'Under Review',
+        },
+        {
+            date: '2021-11-10T01:55',
+            pinCode: '201314',
+            id: '123450',
             placeOfIncident: 'Sarita Vihar',
             slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
             type: 'Dowry',
@@ -30,34 +60,7 @@ const PastComplaints = () => {
         {
             date: '2021-11-19T01:55',
             pinCode: '201314',
-            id: '123456',
-            placeOfIncident: 'Sarita Vihar',
-            slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-            type: 'Dowry',
-            status: 'Under Review',
-        },
-        {
-            date: '2021-11-19T01:55',
-            pinCode: '201314',
-            id: '123456',
-            placeOfIncident: 'Sarita Vihar',
-            slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-            type: 'Dowry',
-            status: 'Under Review',
-        },
-        {
-            date: '2021-11-19T01:55',
-            pinCode: '201314',
-            id: '123456',
-            placeOfIncident: 'Sarita Vihar',
-            slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-            type: 'Dowry',
-            status: 'Under Review',
-        },
-        {
-            date: '2021-11-19T01:55',
-            pinCode: '201314',
-            id: '123456',
+            id: '123451',
             placeOfIncident: 'Sarita Vihar',
             slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
             type: 'Dowry',
@@ -66,6 +69,42 @@ const PastComplaints = () => {
     ];
 
     let dateInput = useRef();
+    let submitRef = useRef();
+
+    let [complaints, setComplaints] = useState(defaultComplaints);
+    let [typeFilter, setTypeFilter] = useState({
+        text: 'All',
+        value: '',
+    });
+    let [placeFilter, setPlaceFilter] = useState('');
+    let [dateFilter, setDateFilter] = useState(new Date('1970-01-01'));
+
+    const filter = () => {
+        setComplaints(
+            defaultComplaints.filter((c) => {
+                let date = new Date(c.date);
+                if (
+                    c.type
+                        .toLowerCase()
+                        .startsWith(typeFilter.value.toLowerCase()) &&
+                    c.placeOfIncident
+                        .toLowerCase()
+                        .startsWith(placeFilter.toLowerCase()) &&
+                    new Date(
+                        `${date.getFullYear()}-${
+                            date.getMonth() + 1
+                        }-${date.getDate()}`,
+                    ) >= new Date(dateFilter)
+                )
+                    return c;
+            }),
+        );
+    };
+
+    const filterSubmit = (e) => {
+        e.preventDefault();
+        filter();
+    };
 
     return (
         <CustomBackground>
@@ -80,38 +119,104 @@ const PastComplaints = () => {
                 >
                     Past Complaints
                 </h1>
-                <div className={`${styles.searchWrapper}`}>
-                    <input
-                        className={`${styles.inputText} w-100 foreground-white`}
-                        type='text'
-                        placeholder='Search Complaint with Place of Incident'
-                    />
-                    <div className={`${styles.dateInput}`}>
-                        <label
-                            htmlFor='date'
-                            className='subheading-text foreground-primary w-35'
-                        >
-                            Select Date and Time of Incident
-                        </label>
+                <form
+                    onSubmit={filterSubmit}
+                    className={`${styles.searchWrapper}`}
+                >
+                    <div className={`${styles.filter}`}>
                         <input
-                            ref={dateInput}
-                            id='date'
-                            className={`${styles.inputText}`}
-                            style={{
-                                color: 'var(--clr-white)',
-                            }}
-                            type='datetime-local'
-                            placeholder='Select Date and Time of Incident'
+                            className={`${styles.inputText} w-45 foreground-white`}
+                            type='text'
+                            placeholder='Search Complaint with Place of Incident'
+                            onChange={(e) => setPlaceFilter(e.target.value)}
+                        />
+                        <Select
+                            placeholder='Choose type of Offense'
+                            values={[
+                                { text: 'All', value: '' },
+                                { text: 'Rape', value: 'rape' },
+                                { text: 'Harass', value: 'harass' },
+                                { text: 'Dowry', value: 'dowry' },
+                                { text: 'Theft', value: 'theft' },
+                            ]}
+                            defaultValue={{ text: 'All', value: '' }}
+                            setValue={setTypeFilter}
+                            classNames={`foreground-white w-45 ${styles.inputText}`}
                         />
                     </div>
-                </div>
+                    <div className={`${styles.dateInput}`}>
+                        <div className={`${styles.dateWrapper} w-75`}>
+                            <label
+                                htmlFor='date'
+                                className='subheading-text foreground-primary'
+                            >
+                                Select Start Date
+                            </label>
+                            <input
+                                ref={dateInput}
+                                id='date'
+                                className={`${styles.inputText} w-75 foreground-white`}
+                                type='date'
+                                placeholder='Select Date and Time of Incident'
+                                onChange={(e) => setDateFilter(e.target.value)}
+                            />
+                            <div
+                                className={`${styles.close}`}
+                                onClick={() => {
+                                    dateInput.current.value = '';
+                                    setDateFilter(
+                                        (curr) => new Date('1970-01-01'),
+                                    );
+                                    setComplaints(
+                                        defaultComplaints.filter((c) => {
+                                            let date = new Date(c.date);
+                                            if (
+                                                c.type
+                                                    .toLowerCase()
+                                                    .startsWith(
+                                                        typeFilter.value.toLowerCase(),
+                                                    ) &&
+                                                c.placeOfIncident
+                                                    .toLowerCase()
+                                                    .startsWith(
+                                                        placeFilter.toLowerCase(),
+                                                    ) &&
+                                                new Date(
+                                                    `${date.getFullYear()}-${
+                                                        date.getMonth() + 1
+                                                    }-${date.getDate()}`,
+                                                ) >= new Date('1970-01-01')
+                                            )
+                                                return c;
+                                        }),
+                                    );
+                                }}
+                            >
+                                <FontAwesomeIcon icon={faTimes} />
+                            </div>
+                        </div>
+                        <button
+                            type='submit'
+                            className='submit-button w-25 border-radius-10'
+                            ref={submitRef}
+                        >
+                            Submit
+                        </button>
+                    </div>
+                </form>
                 <div className={`${styles.complaints}`}>
-                    {complaints.map((complaint) => (
-                        <CitizenComplaint
-                            id={complaint.id}
-                            complaint={complaint}
-                        />
-                    ))}
+                    {complaints.length > 0 ? (
+                        complaints.map((complaint) => (
+                            <CitizenComplaint
+                                id={complaint.id}
+                                complaint={complaint}
+                            />
+                        ))
+                    ) : (
+                        <p className='subheading-text center-text foreground-error'>
+                            No Results Found!
+                        </p>
+                    )}
                 </div>
             </div>
         </CustomBackground>

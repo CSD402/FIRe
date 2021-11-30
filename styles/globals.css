@@ -26,6 +26,7 @@ body,
     --clr-white-translucent: hsla(0, 0%, 99%, 0.3);
     --clr-black: hsla(0, 2%, 11%, 1);
     --clr-black-translucent: hsla(0, 2%, 11%, 0.6);
+    --clr-error: #e63946;
 
     /* Fonts */
     --font-heading: 'Nunito', sans-serif;
@@ -100,7 +101,7 @@ input:focus {
 }
 
 .foreground-error {
-    color: #e63946;
+    color: var(--clr-error);
 }
 
 .heading-font {
@@ -265,6 +266,14 @@ input:focus {
 
 .w-35 {
     width: 35%;
+}
+
+.w-40 {
+    width: 40%;
+}
+
+.w-45 {
+    width: 45%;
 }
 
 .w-50 {

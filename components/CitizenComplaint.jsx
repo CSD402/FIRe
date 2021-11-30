@@ -35,7 +35,7 @@ const CitizenComplaint = ({ complaint }) => {
                             <span className='foreground-primary bold-text'>
                                 Date:
                             </span>{' '}
-                            {Date(complaint.date).toString()}
+                            {new Date(complaint.date).toString()}
                         </p>
                         <p
                             className={`${styles.complaintDate} foreground-white`}
