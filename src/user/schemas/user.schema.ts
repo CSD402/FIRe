@@ -7,8 +7,8 @@ export const UserSchema = new mongoose.Schema({
   },
   aadhaar: {
     type: Number,
-    required: true,
     unique: true,
+    required: true,
   },
   phone_number: {
     type: Number,
@@ -20,6 +20,10 @@ export const UserSchema = new mongoose.Schema({
     required: true,
   },
   gender: {
+    type: String,
+    required: true,
+  },
+  password: {
     type: String,
     required: true,
   },

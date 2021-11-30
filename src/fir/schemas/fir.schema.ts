@@ -1,15 +1,16 @@
 import * as mongoose from 'mongoose';
+var Schema = mongoose.Schema;
 
 export const FirSchema = new mongoose.Schema({
   complaint_id: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: 'Complaint',
     required: true,
-    unique: true,
   },
   approved_by: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: 'PoliceOfficer',
     required: true,
-    unique: true,
   },
   comments: {
     type: String,

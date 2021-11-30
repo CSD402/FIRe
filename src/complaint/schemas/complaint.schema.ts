@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+var Schema = mongoose.Schema;
 
 export const ComplaintSchema = new mongoose.Schema({
   place_of_incident: {
@@ -23,6 +24,11 @@ export const ComplaintSchema = new mongoose.Schema({
   },
   suspect_desc: {
     type: String,
+  },
+  filed_by: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
   },
   comments: {
     type: String,
