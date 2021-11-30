@@ -1,0 +1,75 @@
+.modal {
+    position: relative;
+    padding: 2.5%;
+}
+
+.modal .close {
+    cursor: pointer;
+    position: absolute;
+    right: -3%;
+    top: -4%;
+    width: 3.5rem;
+    height: 3.5rem;
+    border: 2.5px solid var(--clr-white);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.modal .close:hover {
+    background-color: var(--clr-white-translucent);
+}
+
+.complaint {
+    height: 7.5rem;
+    margin: 0.75% 0;
+    padding: 0.5% 1%;
+    display: flex;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.complaint:hover {
+    outline: 2px solid var(--clr-primary-translucent);
+}
+
+.left,
+.right {
+    width: 50%;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.complaintSlug {
+    font-size: 1.15rem;
+}
+
+.complaintDate {
+    font-size: 1.5rem;
+}
+
+.complaintData {
+    background-color: var(--clr-white-translucent);
+    accent-color: var(--clr-primary);
+    padding: 1.25rem 1.5rem;
+    margin: 0.75rem 0;
+    font-size: 1.25rem;
+    border: none;
+    border-radius: 0.5rem;
+    outline: 3px solid transparent;
+    transition: all 0.7s;
+    grid-column: 1;
+}

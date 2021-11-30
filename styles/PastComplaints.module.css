@@ -62,36 +62,3 @@
     height: 70%;
     overflow-y: auto;
 }
-
-.complaint {
-    height: 7.5rem;
-    margin: 0.75% 0;
-    padding: 0.5% 1%;
-    display: flex;
-}
-
-.left,
-.right {
-    width: 50%;
-}
-
-.left {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-}
-
-.right {
-    text-align: right;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-}
-
-.complaintSlug {
-    font-size: 1.15rem;
-}
-
-.complaintDate {
-    font-size: 1.5rem;
-}

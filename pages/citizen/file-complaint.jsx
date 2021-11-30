@@ -1,6 +1,4 @@
 import { useRef } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSortDown } from '@fortawesome/free-solid-svg-icons';
 import CustomBackground from '../../components/CustomBackground';
 
 import styles from '../../styles/FileComplaint.module.css';
