@@ -3,6 +3,7 @@ import { PoliceOfficer } from '../interfaces/police-officer.interface';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { AuthService } from 'src/auth/service/auth.service';
+// import { User } from 'src/user/interfaces/user.interface';
 
 @Injectable()
 export class PoliceOfficerService {

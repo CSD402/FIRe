@@ -23,7 +23,6 @@ export class UserController {
   @UseGuards(JwtAuthGuard)
   @Get()
   public async getUsers(@Req() request): Promise<User[]> {
-    console.log(request);
     return this.userService.getUser();
   }
 

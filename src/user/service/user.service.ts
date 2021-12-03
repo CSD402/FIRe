@@ -40,6 +40,7 @@ export class UserService {
         );
       }
       console.log(e);
+      return e;
     }
   }
 
