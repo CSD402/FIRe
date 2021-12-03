@@ -36,6 +36,8 @@ const LoggedOutHome = () => {
 };
 
 const CitizenHome = () => {
+    let { client_data } = useStoreState((store) => store.accountModel);
+
     return (
         <div className={styles.direction}>
             <Image
@@ -45,7 +47,7 @@ const CitizenHome = () => {
                 alt='Shield'
             />
             <h1 className='heading-text foreground-white center-text'>
-                Welcome, {'Suresh Kumar'}
+                Welcome, {client_data.name}
             </h1>
             <a
                 href='/citizen/file-complaint'

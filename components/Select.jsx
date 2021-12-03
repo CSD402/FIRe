@@ -10,6 +10,7 @@ const Select = ({
     defaultValue,
     classNames,
     setValue,
+    dark,
     ...extra
 }) => {
     let [optionsOpen, setOptionsOpen] = useState(false);
@@ -26,7 +27,9 @@ const Select = ({
             onMouseEnter={() => setOptionsOpen(true)}
             onMouseLeave={() => setOptionsOpen(false)}
         >
-            {selectedValue ? selectedValue.text : placeholder}
+            <span className={dark ? 'foreground-black' : 'foreground-white'}>
+                {selectedValue ? selectedValue.text : placeholder}
+            </span>
             <div
                 className={`${styles.options} ${
                     optionsOpen && styles.show
@@ -37,7 +40,9 @@ const Select = ({
             >
                 {values.map((value, index) => (
                     <div
-                        className={`${styles.option}`}
+                        className={`${styles.option} ${
+                            dark ? 'foreground-black' : 'foreground-white'
+                        }`}
                         key={value.value}
                         style={{
                             transform: !optionsOpen

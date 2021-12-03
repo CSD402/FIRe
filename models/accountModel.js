@@ -1,6 +1,7 @@
 import { thunk, action } from 'easy-peasy';
 import cookies from 'react-cookies';
 import { toast } from 'react-toastify';
+import jwt_decode from 'jwt-decode';
 
 // eslint-disable-next-line
 export default {
@@ -8,7 +9,7 @@ export default {
     // 0 -> None
     // 1 -> Citizen
     // 2 -> Police
-    type: 2,
+    type: 0,
 
     logged_in: false,
     token: null,
@@ -59,101 +60,74 @@ export default {
         },
     ),
 
-    clientLogin: thunk(
-        async (
-            actions,
-            {
-                email,
-                password,
-                //  toggleLoader
-            },
-        ) => {
-            fetch(`/api/client/auth/login/`, {
-                method: 'POST',
-                headers: new Headers({
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                }),
-                body: JSON.stringify({
-                    email: email,
-                    password: password,
-                }),
-            })
-                .then(async (resp) => {
-                    const res = await resp.json();
+    clientLogin: thunk(async (actions, data) => {
+        fetch(`${process.env.NEXT_PUBLIC_API}/user/login/`, {
+            method: 'POST',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            }),
+            body: JSON.stringify(data),
+        })
+            .then(async (resp) => {
+                const res = await resp.json();
 
-                    if (resp.status === 202) {
-                        actions.setToken(res.token);
-                        actions.setClientData(res.client_data);
-                        toast.dark('Logged in Successfully!');
-                    } else {
-                        toast.error(res.message);
-                        actions.logout();
-                    }
-                })
-                .catch((e) => {
-                    toast.error('Internal Server Error');
-                    // console.log(e);
+                if (resp.status === 201) {
+                    actions.setToken(res.bearer);
+
+                    let userData = jwt_decode(res.bearer);
+                    actions.setClientData(userData.user);
+                    toast.dark('Logged in Successfully!');
+                } else {
+                    toast.error(res.message);
                     actions.logout();
-                })
-                .finally(() => {
-                    // toggleLoader(false);
-                });
-        },
-    ),
-
-    clientRegister: thunk(
-        async (
-            actions,
-            {
-                email,
-                password,
-                fullName,
-                number,
-                aadhar,
-                address,
-                // toggleLoader,
-            },
-        ) => {
-            fetch(`/api/auth/register/`, {
-                method: 'POST',
-                headers: new Headers({
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                }),
-                body: JSON.stringify({
-                    email: email,
-                    password: password,
-                    full_name: fullName,
-                    number: number,
-                    aadhar: aadhar,
-                    address: address,
-                }),
+                }
             })
-                .then(async (resp) => {
-                    const res = await resp.json();
+            .catch((e) => {
+                toast.error('Internal Server Error');
+                // console.log(e);
+                actions.logout();
+            })
+            .finally(() => {
+                // toggleLoader(false);
+            });
+    }),
 
-                    if (resp.status === 201) {
-                        // console.log(res);
-                        actions.setToken(res.token);
-                        actions.setClientData(res.client_data);
-                        toast.dark('Registered in successfully');
-                    } else {
-                        toast.error(res.message);
-                        // console.log(res);
-                        actions.logout();
-                    }
-                })
-                .catch((e) => {
-                    toast.error('Internal Server Error');
-                    // console.log(e);
+    clientRegister: thunk(async (actions, data) => {
+        fetch(`${process.env.NEXT_PUBLIC_API}/user`, {
+            method: 'POST',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            }),
+            body: JSON.stringify(data),
+        })
+            .then(async (resp) => {
+                const res = await resp.json();
+
+                if (resp.status === 201) {
+                    // console.log(res);
+                    actions.setToken(res.bearer);
+
+                    let userData = jwt_decode(res.bearer);
+                    // console.log(userData);
+                    actions.setClientData(userData.user);
+                    toast.dark('Registered in successfully');
+                } else {
+                    toast.error(res.message);
+                    // console.log(res);
                     actions.logout();
-                })
-                .finally(() => {
-                    toggleLoader(false);
-                });
-        },
-    ),
+                }
+            })
+            .catch((e) => {
+                toast.error('Internal Server Error');
+                console.log(e);
+                actions.logout();
+            })
+            .finally(() => {
+                // toggleLoader(false);
+            });
+    }),
 
     verifyUser: thunk(async (actions) => {
         let savedToken = cookies.load('firetoken');
@@ -191,7 +165,7 @@ export default {
 
     // ACTIONS
     setToken: action(async (state, token) => {
-        cookies.save('firetoken', `Token ${token}`, {
+        cookies.save('firetoken', `${token}`, {
             expires: new Date('03-23-2022'),
         });
         state.token = token;

@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useStoreState, useStoreActions } from 'easy-peasy';
+import { useRouter } from 'next/router';
+import Select from '../../components/Select';
 
 import styles from '../../styles/Authentication.module.css';
 
@@ -22,6 +25,8 @@ const DesignSide = ({ registerActive }) => {
 };
 
 const LoginSide = ({ registerActive, setRegisterActive }) => {
+    const { clientLogin } = useStoreActions((actions) => actions.accountModel);
+
     const {
         register,
         handleSubmit,
@@ -29,7 +34,7 @@ const LoginSide = ({ registerActive, setRegisterActive }) => {
     } = useForm();
 
     const onSubmit = (data) => {
-        console.log(data);
+        clientLogin(data);
     };
 
     return (
@@ -46,22 +51,22 @@ const LoginSide = ({ registerActive, setRegisterActive }) => {
             >
                 <input
                     className={`${styles.inputText} ${
-                        errors.email ? styles.error : ''
+                        errors.aadhaar ? styles.error : ''
                     }`}
-                    type='email'
-                    placeholder='Enter Registered Email Address'
-                    {...register('email', { required: true })}
+                    type='number'
+                    placeholder='Enter Registered Aadhar Number'
+                    {...register('aadhaar', { required: true })}
                 />
-                {errors.email?.type === 'required' ? (
+                {errors.aadhaar?.type === 'required' ? (
                     <p className='normal-text center-text foreground-error'>
-                        Email is required!
+                        Aadhar is required!
                     </p>
                 ) : (
                     <p
                         className='normal-text center-text foreground-dark'
                         style={{ opacity: 0, pointerEvents: 'none' }}
                     >
-                        Email is required!
+                        Aadhar is required!
                     </p>
                 )}
 
@@ -73,8 +78,6 @@ const LoginSide = ({ registerActive, setRegisterActive }) => {
                     placeholder='Enter password'
                     {...register('password', {
                         required: true,
-                        min: 8,
-                        max: 32,
                     })}
                 />
                 {errors.password ? (
@@ -110,20 +113,22 @@ const LoginSide = ({ registerActive, setRegisterActive }) => {
 };
 
 const RegisterSide = ({ registerActive, setRegisterActive }) => {
+    const { clientRegister } = useStoreActions(
+        (actions) => actions.accountModel,
+    );
+
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
 
-    const onSubmit = (data) => {
-        console.log(data);
-    };
+    let [gender, setGender] = useState('');
 
-    useEffect(() => {
-        console.log(Object.keys(errors)[0]);
-        console.log(errors);
-    }, [errors]);
+    const onSubmit = (data) => {
+        let newUser = { ...data, gender: gender.value };
+        clientRegister(newUser);
+    };
 
     return (
         <section
@@ -139,36 +144,36 @@ const RegisterSide = ({ registerActive, setRegisterActive }) => {
             >
                 <input
                     className={`${styles.inputText} ${
-                        errors.fullName ? styles.error : ''
+                        errors.name ? styles.error : ''
                     }`}
                     type='text'
                     placeholder='Enter Full Name'
-                    {...register('fullName', { required: true })}
+                    {...register('name', { required: true })}
                 />
                 <input
                     className={`${styles.inputText} ${
-                        errors.number ? styles.error : ''
+                        errors.phone_number ? styles.error : ''
                     }`}
                     type='text'
                     placeholder='Enter Phone Number'
-                    {...register('number', { required: true })}
+                    {...register('phone_number', { required: true })}
                 />
                 <input
                     className={`${styles.inputText} ${
-                        errors.aadhar ? styles.error : ''
+                        errors.aadhaar ? styles.error : ''
                     }`}
                     type='number'
                     placeholder='Enter Aadhar Number'
-                    {...register('aadhar', { required: true })}
+                    {...register('aadhaar', { required: true })}
                 />
                 <textarea
                     rows={3}
                     cols={25}
                     className={`${styles.inputText} ${
-                        errors.address ? styles.error : ''
+                        errors.residence_area ? styles.error : ''
                     }`}
                     placeholder='Enter Full Address'
-                    {...register('address', { required: true })}
+                    {...register('residence_area', { required: true })}
                 ></textarea>
                 <input
                     className={`${styles.inputText} ${
@@ -185,6 +190,18 @@ const RegisterSide = ({ registerActive, setRegisterActive }) => {
                     type='password'
                     placeholder='Enter password'
                     {...register('password', { required: true })}
+                />
+
+                <Select
+                    classNames={`${styles.inputText}`}
+                    placeholder='Select Gender'
+                    values={[
+                        { text: 'Male', value: 'Male' },
+                        { text: 'Female', value: 'Female' },
+                        { text: 'Other', value: 'Other' },
+                    ]}
+                    dark={false}
+                    setValue={setGender}
                 />
 
                 {errors.email?.type === 'required' ? (
@@ -205,7 +222,6 @@ const RegisterSide = ({ registerActive, setRegisterActive }) => {
                     </p>
                 )}
 
-                <br />
                 <button className='submit-button' type='submit'>
                     SIGN UP!
                 </button>
@@ -221,7 +237,17 @@ const RegisterSide = ({ registerActive, setRegisterActive }) => {
 };
 
 const Login = () => {
+    const router = useRouter();
+
+    const { logged_in } = useStoreState((store) => store.accountModel);
+
     const [registerActive, setRegisterActive] = useState(false);
+
+    useEffect(() => {
+        if (logged_in) {
+            router.replace('/');
+        }
+    }, [logged_in]);
 
     return (
         <div id={styles.authPage}>
