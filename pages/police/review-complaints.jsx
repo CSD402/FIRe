@@ -20,7 +20,8 @@ const ReviewComplaints = () => {
             suspects:
                 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id perferendis, ratione nesciunt voluptatem tempora suscipit corrupti quas eaque alias ea ex quisquam dolore totam a et dicta repudiandae saepe earum dolor adipisci similique doloremque pariatur.',
             type: 'Dowry',
-            status: 'Under Review',
+            status: 'FIR Filed',
+            firFiledBy: 'Ishit Beswal',
         },
         {
             user: 'Mihir Vipradas',
@@ -223,6 +224,7 @@ const ReviewComplaints = () => {
                         complaints.map((complaint) => (
                             <PoliceComplaint
                                 id={complaint.id}
+                                key={complaint.id}
                                 complaint={complaint}
                             />
                         ))

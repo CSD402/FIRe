@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '../styles/CitizenComplaint.module.css';
+import FileFIR from './FileFIR';
 
 const PoliceComplaint = ({ complaint }) => {
     return (
@@ -141,6 +142,11 @@ const PoliceComplaint = ({ complaint }) => {
                             </span>{' '}
                             {complaint.suspects}
                         </p>
+                        <FileFIR
+                            complaint={complaint.id}
+                            status={complaint.status}
+                            firFiledBy={complaint.firFiledBy}
+                        />
                     </div>
                 </div>
             )}
