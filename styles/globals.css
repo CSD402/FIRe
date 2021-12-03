@@ -268,6 +268,10 @@ input:focus {
     width: 35%;
 }
 
+.w-30 {
+    width: 30%;
+}
+
 .w-40 {
     width: 40%;
 }
@@ -302,6 +306,7 @@ input:focus {
     background: none;
     border: none;
     transition: all 0.4s;
+    animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
     -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
 }
 

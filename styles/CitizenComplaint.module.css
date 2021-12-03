@@ -31,6 +31,10 @@
     transition: all 0.2s;
 }
 
+.policeComplaint {
+    height: 9.5rem;
+}
+
 .complaint:hover {
     outline: 2px solid var(--clr-primary-translucent);
 }
@@ -51,6 +55,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+}
+
+.complaintUser {
+    font-size: 1.5rem;
 }
 
 .complaintSlug {

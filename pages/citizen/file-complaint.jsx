@@ -1,11 +1,11 @@
-import { useRef } from 'react';
+import { useState } from 'react';
 import CustomBackground from '../../components/CustomBackground';
 
 import styles from '../../styles/FileComplaint.module.css';
 import Select from '../../components/Select';
 
 const FileComplaint = () => {
-    let select = useRef();
+    let [crimeType, setCrimeType] = useState('');
     return (
         <CustomBackground>
             <div
@@ -86,6 +86,7 @@ const FileComplaint = () => {
                             { text: 'Theft', value: 'theft' },
                         ]}
                         classNames={`foreground-white ${styles.inputText}`}
+                        setValue={setCrimeType}
                     />
                     <textarea
                         required

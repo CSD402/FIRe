@@ -107,19 +107,13 @@ const PoliceHome = () => {
                     data={
                         <Image
                             src='/images/chart.png'
-                            height={250}
-                            width={475}
+                            height={325}
+                            width={525}
                             alt='DATA'
                         />
                     }
                 />
             </div>
-            <a
-                href='/police/new-fir'
-                className={`submit-button dark heading-text w-75 border-radius-15 ${styles.policeHomeButton}`}
-            >
-                FILE NEW FIR
-            </a>
             <a
                 href='/police/review-complaints'
                 className={`submit-button dark heading-text w-75 border-radius-15 ${styles.policeHomeButton}`}
