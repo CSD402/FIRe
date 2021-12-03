@@ -6,4 +6,5 @@ export interface User {
   residence_area: String;
   gender: String;
   password?: string;
+  email?: string;
 }

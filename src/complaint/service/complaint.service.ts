@@ -40,6 +40,14 @@ export class ComplaintService {
     }
   }
 
+  public async getComplaintById_User(id: string): Promise<Complaint[]> {
+    try {
+      return await this.compaintModel.find({ filed_by: id });
+    } catch (error) {
+      return error;
+    }
+  }
+
   public async deleteComplaintById(id: string): Promise<Complaint> {
     try {
       return await this.compaintModel.findByIdAndRemove(id);

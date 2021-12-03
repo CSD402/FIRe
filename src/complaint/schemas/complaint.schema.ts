@@ -56,6 +56,11 @@ export const ComplaintSchema = new mongoose.Schema(
       type: String,
       immutable: true,
     },
+    approved_by: {
+      type: Schema.Types.ObjectId,
+      ref: 'PoliceOfficer',
+      immutable: true,
+    },
   },
   {
     timestamps: true,

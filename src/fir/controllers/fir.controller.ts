@@ -30,6 +30,11 @@ export class FirController {
     return this.firService.getFirById(id);
   }
 
+  @Get('/police/:id')
+  public async getFirById_Police(@Param('id') id): Promise<Fir[]> {
+    return this.firService.getFirById_Police(id);
+  }
+
   @Delete(':id')
   deleteFirById(@Param('id') id): Promise<Fir> {
     return this.firService.deleteFirById(id);

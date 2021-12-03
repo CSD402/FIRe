@@ -5,11 +5,11 @@ import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class FirService {
-  constructor(@InjectModel('Fir') private readonly compaintModel: Model<Fir>) {}
+  constructor(@InjectModel('Fir') private readonly firModel: Model<Fir>) {}
 
   async getFir(): Promise<Fir[]> {
     try {
-      return await this.compaintModel.find();
+      return await this.firModel.find();
     } catch (error) {
       return error;
     }
@@ -17,7 +17,7 @@ export class FirService {
 
   async postFir(fir: Fir): Promise<Fir> {
     console.log(fir);
-    const newFir = new this.compaintModel(fir);
+    const newFir = new this.firModel(fir);
 
     try {
       return await newFir.save();
@@ -28,7 +28,15 @@ export class FirService {
 
   async getFirById(id: string): Promise<Fir> {
     try {
-      return await this.compaintModel.findOne({ _id: id });
+      return await this.firModel.findOne({ _id: id });
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async getFirById_Police(id: string): Promise<Fir[]> {
+    try {
+      return await this.firModel.find({ approved_by: id });
     } catch (error) {
       return error;
     }
@@ -36,7 +44,7 @@ export class FirService {
 
   async deleteFirById(id: string): Promise<Fir> {
     try {
-      return await this.compaintModel.findByIdAndRemove(id);
+      return await this.firModel.findByIdAndRemove(id);
     } catch (error) {
       return error;
     }
@@ -44,7 +52,7 @@ export class FirService {
 
   async putFirById(id: string, fir: Fir): Promise<Fir> {
     try {
-      return await this.compaintModel.findByIdAndUpdate(id, fir, { new: true });
+      return await this.firModel.findByIdAndUpdate(id, fir, { new: true });
     } catch (error) {
       return error;
     }
