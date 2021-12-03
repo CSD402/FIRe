@@ -6,4 +6,5 @@ export class UserDto {
   readonly residence_area: string;
   readonly gender: string;
   readonly password: string;
+  readonly email: string;
 }
