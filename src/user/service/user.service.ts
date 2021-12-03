@@ -88,9 +88,9 @@ export class UserService {
     }
   }
 
-  public async login(user: User): Promise<JSON> {
+  public async login(data: User): Promise<JSON> {
     try {
-      const _user = await this.validateUser(user.aadhaar, user.password);
+      const user = await this.validateUser(data.aadhaar, data.password);
       const bearer = await this.authService.generateJWT_user(user);
       var res = { bearer: bearer };
 
