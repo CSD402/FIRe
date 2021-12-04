@@ -54,7 +54,11 @@ const Navbar = () => {
                 <></>
             )}
 
-            <div id='google_translate_element' ref={translateRef}></div>
+            <div
+                id='google_translate_element'
+                ref={translateRef}
+                className='w-20'
+            ></div>
         </nav>
     );
 };

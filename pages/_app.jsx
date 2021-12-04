@@ -8,10 +8,12 @@ import { ToastContainer } from 'react-toastify';
 import 'reactjs-popup/dist/index.css';
 import 'react-toastify/dist/ReactToastify.css';
 import '../styles/globals.css';
+import '../styles/google-translate.css';
 
 const store = createStore(persist(model, { allow: ['accountModel'] }));
 
 function MyApp({ Component, pageProps }) {
+    // useScript(`http://localhost:5000/translate`);
     useScript(`${process.env.NEXT_PUBLIC_API}/translate`);
     const googleTranslateElementInit = () => {
         /* eslint-disable no-new */

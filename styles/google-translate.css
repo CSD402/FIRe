@@ -1,0 +1,31 @@
+#google_translate_element * {
+    width: 100%;
+}
+
+.goog-te-combo {
+    margin: 0 !important;
+    font-family: var(--font-heading) !important;
+    color: var(--clr-dark);
+    font-size: 1.5rem !important;
+    border: 2px solid var(--clr-dark) !important;
+    border-radius: 15px;
+    padding: 2% 5%;
+    width: 100%;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.goog-te-combo:focus,
+.goog-te-combo:active {
+    outline: none !important;
+}
+
+.goog-te-combo option {
+    background-color: var(--clr-dark);
+    font-family: var(--font-basic);
+    color: var(--clr-white);
+}
+
+.goog-te-banner-frame {
+    display: none !important;
+}
