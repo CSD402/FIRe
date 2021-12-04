@@ -1,4 +1,7 @@
+import { useEffect } from 'react';
+import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 
 import styles from '../../styles/Authentication.module.css';
 
@@ -16,14 +19,16 @@ const DesignSide = () => {
 };
 
 const LoginSide = () => {
+    const { policeLogin } = useStoreActions((actions) => actions.accountModel);
+
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const onSubmit = async (data) => {
+        policeLogin(data);
     };
 
     return (
@@ -37,20 +42,20 @@ const LoginSide = () => {
                     className={`${styles.inputText} ${
                         errors.email ? styles.error : ''
                     }`}
-                    type='email'
-                    placeholder='Enter Registered Email Address'
-                    {...register('email', { required: true })}
+                    type='text'
+                    placeholder='Enter Aadhar Number'
+                    {...register('aadhaar', { required: true })}
                 />
                 {errors.email?.type === 'required' ? (
                     <p className='normal-text center-text foreground-error'>
-                        Email is required!
+                        Aadhar is required!
                     </p>
                 ) : (
                     <p
                         className='normal-text center-text foreground-dark'
                         style={{ opacity: 0, pointerEvents: 'none' }}
                     >
-                        Email is required!
+                        Aadhar is required!
                     </p>
                 )}
 
@@ -62,8 +67,6 @@ const LoginSide = () => {
                     placeholder='Enter password'
                     {...register('password', {
                         required: true,
-                        min: 8,
-                        max: 32,
                     })}
                 />
                 {errors.password ? (
@@ -93,6 +96,16 @@ const LoginSide = () => {
 };
 
 const Login = () => {
+    const router = useRouter();
+
+    const { logged_in } = useStoreState((store) => store.accountModel);
+
+    useEffect(() => {
+        if (logged_in) {
+            router.replace('/');
+        }
+    }, [logged_in]);
+
     return (
         <div id={styles.authPage}>
             <div id={styles.login} className='border-radius-15 glass-effect'>

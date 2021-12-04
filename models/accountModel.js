@@ -17,48 +17,40 @@ export default {
     police_data: {},
 
     // THUNKS
-    policeLogin: thunk(
-        async (
-            actions,
-            {
-                email,
-                password,
-                //  toggleLoader
-            },
-        ) => {
-            fetch(`/api/police/auth/login/`, {
-                method: 'POST',
-                headers: new Headers({
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                }),
-                body: JSON.stringify({
-                    email: email,
-                    password: password,
-                }),
-            })
-                .then(async (resp) => {
-                    const res = await resp.json();
+    policeLogin: thunk(async (actions, data) => {
+        fetch(`${process.env.NEXT_PUBLIC_API}/police-officer/login`, {
+            method: 'POST',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+            }),
+            body: JSON.stringify(data),
+        })
+            .then(async (resp) => {
+                const res = await resp.json();
 
-                    if (resp.status === 202) {
-                        actions.setToken(res.token);
-                        actions.setPoliceData(res.police_data);
-                        toast.dark('Logged in Successfully!');
-                    } else {
-                        toast.error(res.message);
-                        actions.logout();
-                    }
-                })
-                .catch((e) => {
-                    toast.error('Internal Server Error');
-                    // console.log(e);
+                console.log(resp);
+
+                if (resp.status === 201) {
+                    actions.setToken(res.bearer);
+
+                    let policeData = jwt_decode(res.bearer);
+                    actions.setPoliceData(policeData.officer);
+                    toast.dark('Logged in Successfully!');
+                } else {
+                    toast.error(res.message);
                     actions.logout();
-                })
-                .finally(() => {
-                    // toggleLoader(false);
-                });
-        },
-    ),
+                }
+            })
+            .catch((e) => {
+                toast.error('Internal Server Error');
+                console.log(e);
+                actions.logout();
+            })
+            .finally(() => {
+                // toggleLoader(false);
+            });
+    }),
 
     clientLogin: thunk(async (actions, data) => {
         fetch(`${process.env.NEXT_PUBLIC_API}/user/login/`, {
