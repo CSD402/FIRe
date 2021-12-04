@@ -49,8 +49,14 @@ export class ComplaintService {
     }
   }
 
-  public async getComplaintById_User(id: string): Promise<Complaint[]> {
+  public async getComplaintById_User(
+    id: string,
+    request: Request,
+  ): Promise<Complaint[]> {
     try {
+      let userData: { user: User } = jwt_decode(request.headers.authorization);
+      console.log(userData.user);
+
       return await this.compaintModel.find({ filed_by: id });
     } catch (error) {
       return error;

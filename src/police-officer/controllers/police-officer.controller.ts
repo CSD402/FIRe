@@ -19,9 +19,8 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 @Controller('police-officer')
 export class PoliceOfficerController {
   constructor(
-    private officerService: PoliceOfficerService,
-  ) // private userService: UserService,
-  {}
+    private officerService: PoliceOfficerService, // private userService: UserService,
+  ) {}
 
   @UseGuards(JwtAuthGuard)
   @Get()
@@ -32,6 +31,11 @@ export class PoliceOfficerController {
   @Post()
   postOfficer(@Body() Officerdto: PoliceOfficerDto): Promise<PoliceOfficer> {
     return this.officerService.postOfficer(Officerdto);
+  }
+
+  @Post('login')
+  public async login(@Body() officer: PoliceOfficerDto): Promise<JSON> {
+    return this.officerService.login(officer);
   }
 
   @Get(':id')
