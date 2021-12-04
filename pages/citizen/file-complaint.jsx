@@ -10,7 +10,7 @@ import Select from '../../components/Select';
 const FileComplaint = () => {
     let router = useRouter();
 
-    let placeOfIncidentRef = useRef();
+    let place_of_incidentRef = useRef();
     let pinCodeRef = useRef();
     let policeStationRef = useRef();
     let dateTimeRef = useRef();
@@ -23,7 +23,7 @@ const FileComplaint = () => {
         e.preventDefault();
 
         let data = {
-            place_of_incident: placeOfIncidentRef.current.value,
+            place_of_incident: place_of_incidentRef.current.value,
             // pincode is seensubjects for now
             // seen_subjects: pinCodeRef.current.value,
             seen_subjects: true,
@@ -74,7 +74,7 @@ const FileComplaint = () => {
                 <form className={`${styles.form}`} onSubmit={submit}>
                     <input
                         required
-                        ref={placeOfIncidentRef}
+                        ref={place_of_incidentRef}
                         className={`${styles.inputText}`}
                         type='text'
                         placeholder='Enter Place of Incident'

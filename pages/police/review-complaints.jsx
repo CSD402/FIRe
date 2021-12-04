@@ -13,7 +13,7 @@ const ReviewComplaints = () => {
             date: '2021-11-15T01:55',
             pinCode: '201314',
             id: '123456',
-            placeOfIncident: 'Dadri',
+            place_of_incident: 'Dadri',
             slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
             details:
                 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad minus laboriosam debitis corporis hic rerum eligendi quae quasi beatae eaque excepturi asperiores a dolorum labore repudiandae assumenda eveniet quibusdam optio consequuntur voluptatum explicabo voluptates, rem alias et? Provident, non earum!',
@@ -28,7 +28,7 @@ const ReviewComplaints = () => {
             date: '2021-11-19T01:55',
             pinCode: '201314',
             id: '123457',
-            placeOfIncident: 'Sarita Vihar',
+            place_of_incident: 'Sarita Vihar',
             slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
             type: 'Rape',
             status: 'Under Review',
@@ -38,7 +38,7 @@ const ReviewComplaints = () => {
             date: '2021-11-19T01:55',
             pinCode: '201314',
             id: '123458',
-            placeOfIncident: 'Hapur',
+            place_of_incident: 'Hapur',
             slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
             type: 'Dowry',
             status: 'Under Review',
@@ -48,7 +48,7 @@ const ReviewComplaints = () => {
             date: '2021-11-19T01:55',
             pinCode: '201314',
             id: '123459',
-            placeOfIncident: 'Hapur',
+            place_of_incident: 'Hapur',
             slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
             type: 'Dowry',
             status: 'Under Review',
@@ -58,7 +58,7 @@ const ReviewComplaints = () => {
             date: '2021-11-10T01:55',
             pinCode: '201314',
             id: '123450',
-            placeOfIncident: 'Sarita Vihar',
+            place_of_incident: 'Sarita Vihar',
             slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
             type: 'Dowry',
             status: 'Under Review',
@@ -68,7 +68,7 @@ const ReviewComplaints = () => {
             date: '2021-11-19T01:55',
             pinCode: '201314',
             id: '123451',
-            placeOfIncident: 'Sarita Vihar',
+            place_of_incident: 'Sarita Vihar',
             slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
             type: 'Dowry',
             status: 'Under Review',
@@ -95,7 +95,7 @@ const ReviewComplaints = () => {
                     c.type
                         .toLowerCase()
                         .startsWith(typeFilter.value.toLowerCase()) &&
-                    c.placeOfIncident
+                    c.place_of_incident
                         .toLowerCase()
                         .startsWith(placeFilter.toLowerCase()) &&
                     c.user.toLowerCase().startsWith(userFilter.toLowerCase()) &&
@@ -191,7 +191,7 @@ const ReviewComplaints = () => {
                                                     .startsWith(
                                                         typeFilter.value.toLowerCase(),
                                                     ) &&
-                                                c.placeOfIncident
+                                                c.place_of_incident
                                                     .toLowerCase()
                                                     .startsWith(
                                                         placeFilter.toLowerCase(),

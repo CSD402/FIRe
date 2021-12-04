@@ -32,7 +32,7 @@ const PoliceComplaint = ({ complaint }) => {
                         <p
                             className={`${styles.complaintSlug} foreground-white`}
                         >
-                            {complaint.placeOfIncident}
+                            {complaint.place_of_incident}
                         </p>
                     </div>
                     <div className={`${styles.right}`}>
@@ -103,7 +103,7 @@ const PoliceComplaint = ({ complaint }) => {
                             <span className='foreground-primary bold-text'>
                                 Place of Incident:{' '}
                             </span>{' '}
-                            {complaint.placeOfIncident}
+                            {complaint.place_of_incident}
                         </p>
                         <p
                             className={`${styles.complaintData} foreground-white`}

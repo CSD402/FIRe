@@ -1,6 +1,7 @@
 import Popup from 'reactjs-popup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { capitalizeFirstLetter, sluggify } from '../utils/string';
 
 import styles from '../styles/CitizenComplaint.module.css';
 
@@ -15,17 +16,18 @@ const CitizenComplaint = ({ complaint }) => {
                         <h1
                             className={`subheading-text foreground-primary ${styles.complaintType}`}
                         >
-                            {complaint.type} Case
+                            {capitalizeFirstLetter(complaint.incident_type)}{' '}
+                            Case
                         </h1>
                         <p
                             className={`${styles.complaintSlug} foreground-white`}
                         >
-                            {complaint.slug}
+                            {sluggify(complaint.comments)}
                         </p>
                         <p
                             className={`${styles.complaintSlug} foreground-white`}
                         >
-                            {complaint.placeOfIncident}
+                            {complaint.place_of_incident}
                         </p>
                     </div>
                     <div className={`${styles.right}`}>
@@ -35,7 +37,9 @@ const CitizenComplaint = ({ complaint }) => {
                             <span className='foreground-primary bold-text'>
                                 Date:
                             </span>{' '}
-                            {new Date(complaint.date).toString()}
+                            {new Date(
+                                complaint.date_time_of_incident,
+                            ).toString()}
                         </p>
                         <p
                             className={`${styles.complaintDate} foreground-white`}
@@ -62,7 +66,7 @@ const CitizenComplaint = ({ complaint }) => {
                         <FontAwesomeIcon icon={faTimes} />
                     </span>
                     <h1 className='heading-text center-text uppercase-text foreground-white'>
-                        Complaint {complaint.id}
+                        Complaint {complaint.uid}
                     </h1>
                     <h3 className='subheading-text center-text uppercase-text foreground-white'>
                         <span className='foreground-primary'>Status: </span>
@@ -75,7 +79,7 @@ const CitizenComplaint = ({ complaint }) => {
                             <span className='foreground-primary bold-text'>
                                 Type of Case:{' '}
                             </span>{' '}
-                            {complaint.type}
+                            {complaint.incident_type}
                         </p>
                         <p
                             className={`${styles.complaintData} foreground-white`}
@@ -83,7 +87,7 @@ const CitizenComplaint = ({ complaint }) => {
                             <span className='foreground-primary bold-text'>
                                 Place of Incident:{' '}
                             </span>{' '}
-                            {complaint.placeOfIncident}
+                            {complaint.place_of_incident}
                         </p>
                         <p
                             className={`${styles.complaintData} foreground-white`}
@@ -91,7 +95,7 @@ const CitizenComplaint = ({ complaint }) => {
                             <span className='foreground-primary bold-text'>
                                 Pin Code:{' '}
                             </span>{' '}
-                            {complaint.pinCode}
+                            {complaint.place_of_incident}
                         </p>
                         {/* <p
                             className={`${styles.complaintData} foreground-white`}
@@ -104,7 +108,7 @@ const CitizenComplaint = ({ complaint }) => {
                             <span className='foreground-primary bold-text'>
                                 Date and Time of Incident:{' '}
                             </span>{' '}
-                            {complaint.date}
+                            {complaint.date_time_of_incident}
                         </p>
                         <p
                             className={`${styles.complaintData} foreground-white`}
@@ -112,7 +116,7 @@ const CitizenComplaint = ({ complaint }) => {
                             <span className='foreground-primary bold-text'>
                                 Details of Incident:{' '}
                             </span>{' '}
-                            {complaint.details}
+                            {complaint.comments}
                         </p>
                         <p
                             className={`${styles.complaintData} foreground-white`}
@@ -120,7 +124,7 @@ const CitizenComplaint = ({ complaint }) => {
                             <span className='foreground-primary bold-text'>
                                 Details of Suspect:{' '}
                             </span>{' '}
-                            {complaint.suspects}
+                            {complaint.suspect_desc}
                         </p>
                     </div>
                 </div>
