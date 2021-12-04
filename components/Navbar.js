@@ -10,6 +10,11 @@ import styles from '../styles/Navbar.module.css';
 const Navbar = () => {
     let translateRef = useRef();
 
+    const [mounted, setMounted] = useState(false);
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     const loginType = useStoreState((store) => store.accountModel.type);
     const logout = useStoreActions((actions) => actions.accountModel.logout);
 
@@ -49,11 +54,7 @@ const Navbar = () => {
                 <></>
             )}
 
-            <div
-                id='google_translate_element'
-                ref={translateRef}
-                className={styles.translate_google}
-            ></div>
+            <div id='google_translate_element' ref={translateRef}></div>
         </nav>
     );
 };

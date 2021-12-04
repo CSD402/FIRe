@@ -23,8 +23,6 @@ function MyApp({ Component, pageProps }) {
             },
             'google_translate_element',
         );
-
-        console.log(window.google);
     };
 
     useEffect(() => {

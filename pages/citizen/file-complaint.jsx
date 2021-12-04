@@ -1,10 +1,15 @@
 import { useState, useRef } from 'react';
+import cookies from 'react-cookies';
 import CustomBackground from '../../components/CustomBackground';
+import { toast } from 'react-toastify';
+import { useRouter } from 'next/router';
 
 import styles from '../../styles/FileComplaint.module.css';
 import Select from '../../components/Select';
 
 const FileComplaint = () => {
+    let router = useRouter();
+
     let placeOfIncidentRef = useRef();
     let pinCodeRef = useRef();
     let policeStationRef = useRef();
@@ -20,14 +25,34 @@ const FileComplaint = () => {
         let data = {
             place_of_incident: placeOfIncidentRef.current.value,
             // pincode is seensubjects for now
-            seen_subjects: pinCodeRef.current.value,
+            // seen_subjects: pinCodeRef.current.value,
+            seen_subjects: true,
             nearest_station: policeStationRef.current.value,
             date_time_of_incident: dateTimeRef.current.value,
             comments: descriptionRef.current.value,
             suspect_desc: suspectRef.current.value,
             incident_type: crimeType.value,
         };
-        console.log(data);
+        let authToken = cookies.load('firetoken');
+
+        await fetch(`${process.env.NEXT_PUBLIC_API}/complaint`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${authToken}`,
+            },
+            body: JSON.stringify(data),
+        })
+            .then(async (resp) => {
+                console.log(resp);
+                const res = await resp.json();
+                console.log(res);
+                toast.dark('Complaint Filed');
+                router.push('/citizen/past-complaints');
+            })
+            .catch((e) => {
+                console.log('Error =>', e);
+            });
     };
 
     return (
