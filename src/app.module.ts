@@ -8,6 +8,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import config from './config/keys';
 import { TranslateModule } from './translate/translate.module';
+import { LanguagesModule } from './languages/languages.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { TranslateModule } from './translate/translate.module';
     PoliceOfficerModule,
     UserModule,
     TranslateModule,
+    LanguagesModule,
     MongooseModule.forRoot(config.mongoURI),
   ],
 })
