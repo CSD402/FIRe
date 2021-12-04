@@ -39,8 +39,11 @@ export class ComplaintController {
   }
 
   @Get('/user/:id')
-  public async getComplaintById_User(@Param('id') id): Promise<Complaint[]> {
-    return this.complaintService.getComplaintById_User(id);
+  public async getComplaintById_User(
+    @Param('id') id,
+    @Req() request: Request,
+  ): Promise<Complaint[]> {
+    return this.complaintService.getComplaintById_User(id, request);
   }
 
   @Delete(':id')
