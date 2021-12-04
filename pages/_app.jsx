@@ -12,19 +12,19 @@ import '../styles/globals.css';
 const store = createStore(persist(model, { allow: ['accountModel'] }));
 
 function MyApp({ Component, pageProps }) {
-    useScript(
-        'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit',
-    );
+    useScript(`${process.env.NEXT_PUBLIC_API}/translate`);
     const googleTranslateElementInit = () => {
         /* eslint-disable no-new */
         new window.google.translate.TranslateElement(
             {
-                pageLanguage: 'hi',
+                pageLanguage: 'en',
                 layout: window.google.translate.TranslateElement.FloatPosition
                     .TOP_LEFT,
             },
             'google_translate_element',
         );
+
+        console.log(window.google);
     };
 
     useEffect(() => {

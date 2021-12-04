@@ -1,11 +1,35 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import CustomBackground from '../../components/CustomBackground';
 
 import styles from '../../styles/FileComplaint.module.css';
 import Select from '../../components/Select';
 
 const FileComplaint = () => {
-    let [crimeType, setCrimeType] = useState('');
+    let placeOfIncidentRef = useRef();
+    let pinCodeRef = useRef();
+    let policeStationRef = useRef();
+    let dateTimeRef = useRef();
+    let descriptionRef = useRef();
+    let suspectRef = useRef();
+
+    let [crimeType, setCrimeType] = useState({ text: '', value: '' });
+
+    const submit = async (e) => {
+        e.preventDefault();
+
+        let data = {
+            place_of_incident: placeOfIncidentRef.current.value,
+            // pincode is seensubjects for now
+            seen_subjects: pinCodeRef.current.value,
+            nearest_station: policeStationRef.current.value,
+            date_time_of_incident: dateTimeRef.current.value,
+            comments: descriptionRef.current.value,
+            suspect_desc: suspectRef.current.value,
+            incident_type: crimeType.value,
+        };
+        console.log(data);
+    };
+
     return (
         <CustomBackground>
             <div
@@ -22,27 +46,31 @@ const FileComplaint = () => {
                 <h1 className='subheading-text center-text foreground-primary'>
                     Please enter the details as accurately as you can
                 </h1>
-                <form className={`${styles.form}`} action=''>
+                <form className={`${styles.form}`} onSubmit={submit}>
                     <input
                         required
+                        ref={placeOfIncidentRef}
                         className={`${styles.inputText}`}
                         type='text'
                         placeholder='Enter Place of Incident'
                     />
                     <input
                         required
+                        ref={pinCodeRef}
                         className={`${styles.inputText}`}
                         type='text'
                         placeholder='Enter Pin Code'
                     />
                     <input
                         required
+                        ref={policeStationRef}
                         className={`${styles.inputText}`}
                         type='text'
                         placeholder='Select Nearest Police Station'
                     />
                     <input
                         required
+                        ref={dateTimeRef}
                         className={`${styles.inputText}`}
                         style={{
                             color: 'var(--clr-white)',
@@ -50,33 +78,6 @@ const FileComplaint = () => {
                         type='datetime-local'
                         placeholder='Select Date and Time of Incident'
                     />
-                    {/* <input
-                        required
-                        className={`${styles.inputText}`}
-                        type='text'
-                        placeholder='Choose type of Offense'
-                    /> */}
-                    {/* <div className={styles.selectContainer}>
-                        <select
-                            ref={select}
-                            defaultValue='0'
-                            name='offense'
-                            id='offense-select'
-                            className={`${styles.inputText} ${styles.select} foreground-white`}
-                        >
-                            <option value='0'>
-                                Please choose offense type
-                            </option>
-                            <option value='rape'>Rape</option>
-                            <option value='harass'>Harass</option>
-                            <option value='dowry'>Dowry</option>
-                            <option value='theft'>Theft</option>
-                        </select>
-                        <FontAwesomeIcon
-                            icon={faSortDown}
-                            className={styles.selectIcon}
-                        />
-                    </div> */}
                     <Select
                         placeholder='Choose type of Offense'
                         values={[
@@ -90,6 +91,7 @@ const FileComplaint = () => {
                     />
                     <textarea
                         required
+                        ref={descriptionRef}
                         // rows={10}
                         // cols={40}
                         className={`${styles.inputText} ${styles.textArea}`}
@@ -97,12 +99,14 @@ const FileComplaint = () => {
                     ></textarea>
                     <textarea
                         required
+                        ref={suspectRef}
                         // rows={10}
                         // cols={40}
                         className={`${styles.inputText} ${styles.textArea}`}
                         placeholder='Give a description of the suspect as best as you can'
                     ></textarea>
                     <button
+                        type='submit'
                         className={`submit-button dark border-radius-10 w-100 ${styles.btn}`}
                     >
                         LODGE COMPLAINT

@@ -14,6 +14,7 @@
 
 .inputText {
     background-color: var(--clr-white-translucent);
+    color: var(--clr-white);
     accent-color: var(--clr-primary);
     padding: 1.25rem 1.5rem;
     margin: 0.75rem 0;
