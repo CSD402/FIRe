@@ -8,4 +8,5 @@ export class ComplaintDto {
   readonly suspect_desc: string;
   readonly comments: string;
   readonly status: string;
+  readonly date_time_of_incident: string;
 }
