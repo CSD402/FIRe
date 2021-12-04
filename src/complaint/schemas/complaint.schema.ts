@@ -61,6 +61,11 @@ export const ComplaintSchema = new mongoose.Schema(
       ref: 'PoliceOfficer',
       immutable: true,
     },
+    date_time_of_incident: {
+      type: String,
+      immutable: true,
+      required: true,
+    },
   },
   {
     timestamps: true,

@@ -11,4 +11,5 @@ export interface Complaint {
   suspect_desc?: string;
   comments?: string;
   status: string;
+  date_time_of_incident: string;
 }
