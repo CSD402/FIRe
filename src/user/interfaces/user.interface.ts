@@ -1,5 +1,5 @@
 export interface User {
-  id?: string;
+  _id?: string;
   name: String;
   aadhaar: Number;
   phone_number: Number;

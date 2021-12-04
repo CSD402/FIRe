@@ -6,10 +6,14 @@ import {
   Param,
   Post,
   Put,
+  Req,
+  UseGuards,
 } from '@nestjs/common';
 import { ComplaintService } from '../service/complaint.service';
 import { ComplaintDto } from '../dto/complaint.dto';
 import { Complaint } from '../interfaces/complaint.interface';
+import { Request } from 'express';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('complaint')
 export class ComplaintController {
@@ -20,11 +24,13 @@ export class ComplaintController {
     return this.complaintService.getComplaint();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
   public async postComplaint(
     @Body() complaint: ComplaintDto,
+    @Req() request: Request,
   ): Promise<Complaint> {
-    return this.complaintService.postComplaint(complaint);
+    return this.complaintService.postComplaint(complaint, request);
   }
 
   @Get(':id')

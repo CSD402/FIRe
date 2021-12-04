@@ -5,6 +5,9 @@ import { InjectModel } from '@nestjs/mongoose';
 import { v4 as uuidv4 } from 'uuid';
 import { Types } from 'mongoose';
 import { combineAll } from 'rxjs';
+import { Request } from 'express';
+import jwt_decode from 'jwt-decode';
+import { User } from 'src/user/interfaces/user.interface';
 
 @Injectable()
 export class ComplaintService {
@@ -20,12 +23,18 @@ export class ComplaintService {
     }
   }
 
-  public async postComplaint(complaint: Complaint): Promise<Complaint> {
+  public async postComplaint(
+    complaint: Complaint,
+    request: Request,
+  ): Promise<Complaint> {
     try {
-      let uid = uuidv4().slice(0, 6);
+      let userData: { user: User } = jwt_decode(request.headers.authorization);
+      console.log(userData.user._id);
 
-      var newComplaint = new this.compaintModel(complaint);
-      console.log(newComplaint);
+      var newComplaint = new this.compaintModel({
+        ...complaint,
+        filed_by: userData.user._id,
+      });
       return await newComplaint.save();
     } catch (error) {
       return error;
