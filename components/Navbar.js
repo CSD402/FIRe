@@ -1,11 +1,15 @@
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-
 import { useStoreState, useStoreActions } from 'easy-peasy';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLanguage } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '../styles/Navbar.module.css';
 
 const Navbar = () => {
+    let translateRef = useRef();
+
     const loginType = useStoreState((store) => store.accountModel.type);
     const logout = useStoreActions((actions) => actions.accountModel.logout);
 
@@ -44,6 +48,12 @@ const Navbar = () => {
             ) : (
                 <></>
             )}
+
+            <div
+                id='google_translate_element'
+                ref={translateRef}
+                className={styles.translate_google}
+            ></div>
         </nav>
     );
 };

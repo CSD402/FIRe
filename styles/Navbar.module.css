@@ -22,3 +22,7 @@
     font-family: var(--font-heading);
     color: var(--clr-white);
 }
+
+.skiptranslate div {
+    display: none !important;
+}
