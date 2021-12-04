@@ -10,4 +10,12 @@ export class TranslateController {
 
     return file;
   }
+
+  @Get('/main')
+  @Header('Content-Type', 'text/javascript; charset=utf-8')
+  async getMain(): Promise<String> {
+    const file = await readFileSync('translateMain.js', 'utf-8');
+
+    return file;
+  }
 }
