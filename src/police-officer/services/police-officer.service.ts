@@ -97,12 +97,9 @@ export class PoliceOfficerService {
     }
   }
 
-  public async login(officer: PoliceOfficer): Promise<JSON> {
+  public async login(data: PoliceOfficer): Promise<JSON> {
     try {
-      const _officer = await this.validateOfficer(
-        officer.aadhaar,
-        officer.password,
-      );
+      const officer = await this.validateOfficer(data.aadhaar, data.password);
       const bearer = await this.authService.generateJWT_officer(officer);
       var res = { bearer: bearer };
 

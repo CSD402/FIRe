@@ -13,6 +13,7 @@ import { PoliceOfficerService } from '../services/police-officer.service';
 import { PoliceOfficerDto } from '../dto/police-officer.dto';
 import { PoliceOfficer } from '../interfaces/police-officer.interface';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { request } from 'http';
 // import { UserService } from 'src/user/service/user.service';
 // import { User } from 'src/user/interfaces/user.interface';
 

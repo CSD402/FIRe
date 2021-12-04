@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   Req,
   UseGuards,
 } from '@nestjs/common';
@@ -19,10 +20,10 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 export class ComplaintController {
   constructor(private complaintService: ComplaintService) {}
 
-  @Get()
-  public async getComplaint(): Promise<Complaint[]> {
-    return this.complaintService.getComplaint();
-  }
+  // @Get()
+  // public async getComplaint(): Promise<Complaint[]> {
+  //   return this.complaintService.getComplaint();
+  // }
 
   @UseGuards(JwtAuthGuard)
   @Post()
@@ -33,17 +34,18 @@ export class ComplaintController {
     return this.complaintService.postComplaint(complaint, request);
   }
 
-  @Get(':id')
-  public async getComplaintById(@Param('id') id): Promise<Complaint> {
-    return this.complaintService.getComplaintById(id);
-  }
+  // @Get(':id')
+  // public async getComplaintById(@Param('id') id): Promise<Complaint> {
+  //   return this.complaintService.getComplaintById(id);
+  // }
 
-  @Get('/user/:id')
+  @UseGuards(JwtAuthGuard)
+  @Get()
   public async getComplaintById_User(
-    @Param('id') id,
+    // @Param('id') id,
     @Req() request: Request,
   ): Promise<Complaint[]> {
-    return this.complaintService.getComplaintById_User(id, request);
+    return this.complaintService.getComplaintById_User(request);
   }
 
   @Delete(':id')

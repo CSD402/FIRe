@@ -15,13 +15,13 @@ export class ComplaintService {
     @InjectModel('Complaint') private readonly compaintModel: Model<Complaint>,
   ) {}
 
-  public async getComplaint(): Promise<Complaint[]> {
-    try {
-      return await this.compaintModel.find();
-    } catch (error) {
-      return error;
-    }
-  }
+  // public async getComplaint(): Promise<Complaint[]> {
+  //   try {
+  //     return await this.compaintModel.find();
+  //   } catch (error) {
+  //     return error;
+  //   }
+  // }
 
   public async postComplaint(
     complaint: Complaint,
@@ -49,15 +49,12 @@ export class ComplaintService {
     }
   }
 
-  public async getComplaintById_User(
-    id: string,
-    request: Request,
-  ): Promise<Complaint[]> {
+  public async getComplaintById_User(request: Request): Promise<Complaint[]> {
     try {
       let userData: { user: User } = jwt_decode(request.headers.authorization);
-      console.log(userData.user);
-
-      return await this.compaintModel.find({ filed_by: id });
+      if (userData.user) {
+        return await this.compaintModel.find({ filed_by: userData.user._id });
+      } else return await this.compaintModel.find();
     } catch (error) {
       return error;
     }
