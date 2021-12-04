@@ -9,4 +9,6 @@ export class ComplaintDto {
   readonly comments: string;
   readonly status: string;
   readonly date_time_of_incident: string;
+  readonly officer_name: String;
+  readonly officer_phone: Number;
 }

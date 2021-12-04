@@ -6,10 +6,14 @@ import {
   Param,
   Post,
   Put,
+  Req,
+  UseGuards,
 } from '@nestjs/common';
 import { FirService } from '../service/fir.service';
 import { FirDto } from '../dto/fir.dto';
 import { Fir } from '../interfaces/fir.interface';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { Request } from 'express';
 
 @Controller('fir')
 export class FirController {
@@ -20,9 +24,10 @@ export class FirController {
     return this.firService.getFir();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Post()
-  postFir(@Body() Firdto: FirDto): Promise<Fir> {
-    return this.firService.postFir(Firdto);
+  postFir(@Body() Firdto: FirDto, @Req() request: Request): Promise<Fir> {
+    return this.firService.postFir(Firdto, request);
   }
 
   @Get(':id')

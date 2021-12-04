@@ -6,6 +6,7 @@ export const FirSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'Complaint',
     required: true,
+    unique: true,
     immutable: true,
   },
   approved_by: {
@@ -17,5 +18,15 @@ export const FirSchema = new mongoose.Schema({
   comments: {
     type: String,
     immutable: true,
+  },
+  officer_name: {
+    type: String,
+    required: true,
+    immutable: true,
+  },
+  officer_phone: {
+    type: Number,
+    immutable: true,
+    required: true,
   },
 });

@@ -12,4 +12,6 @@ export interface Complaint {
   comments?: string;
   status: string;
   date_time_of_incident: string;
+  officer_name: String;
+  officer_phone: Number;
 }
