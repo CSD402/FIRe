@@ -114,6 +114,27 @@
     outline-color: #e63946;
 }
 
+.passContainer {
+    position: relative;
+}
+
+.passShowIcon {
+    position: absolute;
+    top: 0;
+    right: 2.5%;
+    /* transform: translateY(-50%); */
+    display: flex;
+    align-items: center;
+    height: 75%;
+    cursor: pointer;
+    transition: all 0.25s;
+    z-index: 5;
+}
+
+.passShowIcon:hover {
+    color: var(--clr-primary);
+}
+
 .authForm {
     width: 85%;
     display: flex;

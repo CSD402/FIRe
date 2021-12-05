@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useRouter } from 'next/router';
 import Select from '../../components/Select';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '../../styles/Authentication.module.css';
 
@@ -26,6 +28,8 @@ const DesignSide = ({ registerActive }) => {
 
 const LoginSide = ({ registerActive, setRegisterActive }) => {
     const { clientLogin } = useStoreActions((actions) => actions.accountModel);
+
+    const [showPass, setShowPass] = useState(false);
 
     const {
         register,
@@ -70,33 +74,41 @@ const LoginSide = ({ registerActive, setRegisterActive }) => {
                     </p>
                 )}
 
-                <input
-                    className={`${styles.inputText} ${
-                        errors.password ? styles.error : ''
-                    }`}
-                    type='password'
-                    placeholder='Enter password'
-                    {...register('password', {
-                        required: true,
-                    })}
-                />
-                {errors.password ? (
-                    <p className='normal-text center-text foreground-error'>
-                        {errors.password?.type === 'required'
-                            ? 'Password is required!'
-                            : errors.password.type === 'min' ||
-                              errors.password.type === 'max'
-                            ? 'Password pattern is not correct!'
-                            : errors.password.type}
-                    </p>
-                ) : (
-                    <p
-                        className='normal-text center-text foreground-dark'
-                        style={{ opacity: 0, pointerEvents: 'none' }}
+                <div className={`${styles.passContainer} w-100`}>
+                    <input
+                        className={`${styles.inputText} ${
+                            errors.password ? styles.error : ''
+                        }`}
+                        type={showPass ? 'text' : 'password'}
+                        placeholder='Enter password'
+                        {...register('password', {
+                            required: true,
+                        })}
+                    />
+                    <div
+                        className={`${styles.passShowIcon} foreground-white subheading-text`}
+                        onClick={() => setShowPass((curr) => !curr)}
                     >
-                        Password is required!
-                    </p>
-                )}
+                        <FontAwesomeIcon icon={showPass ? faEyeSlash : faEye} />
+                    </div>
+                    {errors.password ? (
+                        <p className='normal-text center-text foreground-error'>
+                            {errors.password?.type === 'required'
+                                ? 'Password is required!'
+                                : errors.password.type === 'min' ||
+                                  errors.password.type === 'max'
+                                ? 'Password pattern is not correct!'
+                                : errors.password.type}
+                        </p>
+                    ) : (
+                        <p
+                            className='normal-text center-text foreground-dark'
+                            style={{ opacity: 0, pointerEvents: 'none' }}
+                        >
+                            Password is required!
+                        </p>
+                    )}
+                </div>
                 <br />
                 <button className='submit-button heading-text' type='submit'>
                     SIGN IN!
@@ -116,6 +128,8 @@ const RegisterSide = ({ registerActive, setRegisterActive }) => {
     const { clientRegister } = useStoreActions(
         (actions) => actions.accountModel,
     );
+
+    const [showPass, setShowPass] = useState(false);
 
     const {
         register,
@@ -183,15 +197,27 @@ const RegisterSide = ({ registerActive, setRegisterActive }) => {
                     placeholder='Enter Email Address'
                     {...register('email', { required: true })}
                 />
-                <input
-                    className={`${styles.inputText} ${
-                        errors.password ? styles.error : ''
-                    }`}
-                    type='password'
-                    placeholder='Enter password'
-                    {...register('password', { required: true })}
-                />
-
+                <div className={`${styles.passContainer} w-100`}>
+                    <input
+                        className={`${styles.inputText} ${
+                            errors.password ? styles.error : ''
+                        }`}
+                        type={showPass ? 'text' : 'password'}
+                        placeholder='Enter password'
+                        {...register('password', {
+                            required: true,
+                        })}
+                    />
+                    <div
+                        className={`${styles.passShowIcon} foreground-white subheading-text`}
+                        onClick={() => setShowPass((curr) => !curr)}
+                        style={{
+                            height: '100%',
+                        }}
+                    >
+                        <FontAwesomeIcon icon={showPass ? faEyeSlash : faEye} />
+                    </div>
+                </div>
                 <Select
                     classNames={`${styles.inputText}`}
                     placeholder='Select Gender'
@@ -203,7 +229,6 @@ const RegisterSide = ({ registerActive, setRegisterActive }) => {
                     dark={false}
                     setValue={setGender}
                 />
-
                 {errors.email?.type === 'required' ? (
                     <p
                         className='normal-text center-text foreground-error'
@@ -221,7 +246,6 @@ const RegisterSide = ({ registerActive, setRegisterActive }) => {
                         Email is required!
                     </p>
                 )}
-
                 <button className='submit-button' type='submit'>
                     SIGN UP!
                 </button>

@@ -1,7 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '../../styles/Authentication.module.css';
 
@@ -31,6 +33,8 @@ const LoginSide = () => {
         policeLogin(data);
     };
 
+    const [showPass, setShowPass] = useState(false);
+
     return (
         <section id={styles.loginSide} className={styles.loginActive}>
             <h1 className={`${styles.headingText}`}>LOGIN</h1>
@@ -59,33 +63,41 @@ const LoginSide = () => {
                     </p>
                 )}
 
-                <input
-                    className={`${styles.inputText} ${
-                        errors.password ? styles.error : ''
-                    }`}
-                    type='password'
-                    placeholder='Enter password'
-                    {...register('password', {
-                        required: true,
-                    })}
-                />
-                {errors.password ? (
-                    <p className='normal-text center-text foreground-error'>
-                        {errors.password?.type === 'required'
-                            ? 'Password is required!'
-                            : errors.password.type === 'min' ||
-                              errors.password.type === 'max'
-                            ? 'Password pattern is not correct!'
-                            : errors.password.type}
-                    </p>
-                ) : (
-                    <p
-                        className='normal-text center-text foreground-dark'
-                        style={{ opacity: 0, pointerEvents: 'none' }}
+                <div className={`${styles.passContainer} w-100`}>
+                    <input
+                        className={`${styles.inputText} ${
+                            errors.password ? styles.error : ''
+                        }`}
+                        type={showPass ? 'text' : 'password'}
+                        placeholder='Enter password'
+                        {...register('password', {
+                            required: true,
+                        })}
+                    />
+                    <div
+                        className={`${styles.passShowIcon} foreground-white subheading-text`}
+                        onClick={() => setShowPass((curr) => !curr)}
                     >
-                        Password is required!
-                    </p>
-                )}
+                        <FontAwesomeIcon icon={showPass ? faEyeSlash : faEye} />
+                    </div>
+                    {errors.password ? (
+                        <p className='normal-text center-text foreground-error'>
+                            {errors.password?.type === 'required'
+                                ? 'Password is required!'
+                                : errors.password.type === 'min' ||
+                                  errors.password.type === 'max'
+                                ? 'Password pattern is not correct!'
+                                : errors.password.type}
+                        </p>
+                    ) : (
+                        <p
+                            className='normal-text center-text foreground-dark'
+                            style={{ opacity: 0, pointerEvents: 'none' }}
+                        >
+                            Password is required!
+                        </p>
+                    )}
+                </div>
                 <br />
                 <button className='submit-button heading-text' type='submit'>
                     SIGN IN!
