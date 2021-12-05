@@ -13,7 +13,11 @@ const PoliceComplaint = ({ complaint }) => {
     const changeComplaintStatus = async () => {
         let authToken = cookies.load('firetoken');
 
-        if (complaint.status === 'Under Review') return;
+        if (
+            complaint.status === 'Under Review' ||
+            complaint.status === 'FIR Lodged'
+        )
+            return;
 
         fetch(
             `${process.env.NEXT_PUBLIC_API}/complaint/review/${complaint._id}`,
@@ -43,7 +47,8 @@ const PoliceComplaint = ({ complaint }) => {
                         <h1
                             className={`subheading-text foreground-primary ${styles.complaintType}`}
                         >
-                            {complaint.incident_type} Case
+                            {capitalizeFirstLetter(complaint.incident_type)}{' '}
+                            Case
                         </h1>
                         <p
                             className={`${styles.complaintUser} foreground-primary font-bold`}
@@ -182,6 +187,7 @@ const PoliceComplaint = ({ complaint }) => {
                             complaintId={complaint._id}
                             status={complaint.status}
                             firFiledBy={complaint.firFiledBy}
+                            firId={complaint.fir_id}
                         />
                     </div>
                 </div>
