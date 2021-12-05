@@ -72,6 +72,14 @@ const CitizenComplaint = ({ complaint }) => {
                         <span className='foreground-primary'>Status: </span>
                         {complaint.status}
                     </h3>
+                    <h3 className='subheading-text center-text uppercase-text foreground-white'>
+                        <span className='foreground-primary'>By: </span>
+                        {complaint.officer_name}
+                    </h3>
+                    <h3 className='subheading-text center-text uppercase-text foreground-white'>
+                        <span className='foreground-primary'>Contact: </span>
+                        {complaint.officer_phone}
+                    </h3>
                     <div className={`${styles.content}`}>
                         <p
                             className={`${styles.complaintData} foreground-white`}
