@@ -49,7 +49,6 @@ export const ComplaintSchema = new mongoose.Schema(
     },
     fir_id: {
       type: String,
-      required: true,
     },
     status: {
       type: String,
