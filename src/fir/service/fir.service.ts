@@ -37,6 +37,7 @@ export class FirService {
         { _id: newFir.complaint_id },
         {
           approved_by: officerData.officer['_id'],
+          fir_id: newFir._id,
           officer_name: officerData.officer.name,
           officer_phone: officerData.officer.phone_number,
           status: 'FIR Lodged',

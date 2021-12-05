@@ -11,5 +11,6 @@ export class ComplaintDto {
   readonly date_time_of_incident: string;
   readonly officer_name: String;
   readonly filed_by_name: String;
+  readonly fir_id: String;
   readonly officer_phone: Number;
 }

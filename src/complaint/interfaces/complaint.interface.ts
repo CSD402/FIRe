@@ -14,5 +14,6 @@ export interface Complaint {
   date_time_of_incident: string;
   officer_name: String;
   filed_by_name: String;
+  fir_id: String;
   officer_phone: Number;
 }
