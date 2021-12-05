@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Popup from 'reactjs-popup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -12,6 +12,10 @@ const FileFIR = ({ complaintId, status, firFiledBy }) => {
             'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam quae esse soluta optio expedita exercitationem error architecto voluptatibus aliquam! Aliquid.',
         createdAt: '2021-08-09',
     });
+
+    useEffect(() => {
+        console.log(complaintId);
+    }, []);
 
     return (
         <Popup

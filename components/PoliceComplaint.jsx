@@ -3,13 +3,38 @@ import PoliceComplaintUser from './PoliceComplaintUser';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { sluggify, capitalizeFirstLetter } from '../utils/string';
+import cookies from 'react-cookies';
+import { toast } from 'react-toastify';
 
 import styles from '../styles/CitizenComplaint.module.css';
 import FileFIR from './FileFIR';
 
 const PoliceComplaint = ({ complaint }) => {
+    const changeComplaintStatus = async () => {
+        let authToken = cookies.load('firetoken');
+
+        if (complaint.status === 'Under Review') return;
+
+        fetch(
+            `${process.env.NEXT_PUBLIC_API}/complaint/review/${complaint._id}`,
+            {
+                method: 'PUT',
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                },
+            },
+        )
+            .then(async (r) => {
+                const resp = await r.json();
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    };
+
     return (
         <Popup
+            onOpen={changeComplaintStatus}
             trigger={
                 <div
                     className={`${styles.complaint} ${styles.policeComplaint} background-black-translucent glass-effect border-radius-10`}
@@ -154,7 +179,7 @@ const PoliceComplaint = ({ complaint }) => {
                             {complaint.suspect_desc}
                         </p>
                         <FileFIR
-                            complaint={complaint.uid}
+                            complaintId={complaint._id}
                             status={complaint.status}
                             firFiledBy={complaint.firFiledBy}
                         />
