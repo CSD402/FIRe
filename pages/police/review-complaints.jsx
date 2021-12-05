@@ -1,83 +1,18 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import CustomBackground from '../../components/CustomBackground';
 import PoliceComplaint from '../../components/PoliceComplaint';
 import Select from '../../components/Select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import cookies from 'react-cookies';
+
 import styles from '../../styles/ReviewComplaints.module.css';
 
 const ReviewComplaints = () => {
-    let defaultComplaints = [
-        {
-            user: 'Kaustubh Rai',
-            date: '2021-11-15T01:55',
-            pinCode: '201314',
-            id: '123456',
-            place_of_incident: 'Dadri',
-            slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-            details:
-                'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad minus laboriosam debitis corporis hic rerum eligendi quae quasi beatae eaque excepturi asperiores a dolorum labore repudiandae assumenda eveniet quibusdam optio consequuntur voluptatum explicabo voluptates, rem alias et? Provident, non earum!',
-            suspects:
-                'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id perferendis, ratione nesciunt voluptatem tempora suscipit corrupti quas eaque alias ea ex quisquam dolore totam a et dicta repudiandae saepe earum dolor adipisci similique doloremque pariatur.',
-            type: 'Dowry',
-            status: 'FIR Filed',
-            firFiledBy: 'Ishit Beswal',
-        },
-        {
-            user: 'Mihir Vipradas',
-            date: '2021-11-19T01:55',
-            pinCode: '201314',
-            id: '123457',
-            place_of_incident: 'Sarita Vihar',
-            slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-            type: 'Rape',
-            status: 'Under Review',
-        },
-        {
-            user: 'Megha Agarwal',
-            date: '2021-11-19T01:55',
-            pinCode: '201314',
-            id: '123458',
-            place_of_incident: 'Hapur',
-            slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-            type: 'Dowry',
-            status: 'Under Review',
-        },
-        {
-            user: 'Kaustubh Rai',
-            date: '2021-11-19T01:55',
-            pinCode: '201314',
-            id: '123459',
-            place_of_incident: 'Hapur',
-            slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-            type: 'Dowry',
-            status: 'Under Review',
-        },
-        {
-            user: 'Megha Agarwal',
-            date: '2021-11-10T01:55',
-            pinCode: '201314',
-            id: '123450',
-            place_of_incident: 'Sarita Vihar',
-            slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-            type: 'Dowry',
-            status: 'Under Review',
-        },
-        {
-            user: 'Kaustubh Rai',
-            date: '2021-11-19T01:55',
-            pinCode: '201314',
-            id: '123451',
-            place_of_incident: 'Sarita Vihar',
-            slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-            type: 'Dowry',
-            status: 'Under Review',
-        },
-    ];
-
     let dateInput = useRef();
     let submitRef = useRef();
 
+    let [defaultComplaints, setDefaultComplaints] = useState([]);
     let [complaints, setComplaints] = useState(defaultComplaints);
     let [typeFilter, setTypeFilter] = useState({
         text: 'All',
@@ -90,9 +25,9 @@ const ReviewComplaints = () => {
     const filter = () => {
         setComplaints(
             defaultComplaints.filter((c) => {
-                let date = new Date(c.date);
+                let date = new Date(c.date_time_of_incident);
                 if (
-                    c.type
+                    c.incident_type
                         .toLowerCase()
                         .startsWith(typeFilter.value.toLowerCase()) &&
                     c.place_of_incident
@@ -114,6 +49,30 @@ const ReviewComplaints = () => {
         e.preventDefault();
         filter();
     };
+
+    const getComplaints = async () => {
+        const authToken = cookies.load('firetoken');
+
+        fetch(`${process.env.NEXT_PUBLIC_API}/complaint`, {
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${authToken}`,
+            },
+        })
+            .then(async (r) => {
+                const response = await r.json();
+                console.log(response);
+                setDefaultComplaints(response);
+                setComplaints(response);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    };
+
+    useEffect(() => {
+        getComplaints();
+    }, []);
 
     return (
         <CustomBackground>
@@ -184,7 +143,9 @@ const ReviewComplaints = () => {
                                     );
                                     setComplaints(
                                         defaultComplaints.filter((c) => {
-                                            let date = new Date(c.date);
+                                            let date = new Date(
+                                                c.date_time_of_incident,
+                                            );
                                             if (
                                                 c.type
                                                     .toLowerCase()
@@ -223,8 +184,8 @@ const ReviewComplaints = () => {
                     {complaints.length > 0 ? (
                         complaints.map((complaint) => (
                             <PoliceComplaint
-                                id={complaint.id}
-                                key={complaint.id}
+                                id={complaint.uid}
+                                key={complaint.uid}
                                 complaint={complaint}
                             />
                         ))

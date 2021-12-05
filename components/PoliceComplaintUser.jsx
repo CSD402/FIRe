@@ -1,19 +1,42 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Popup from 'reactjs-popup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import cookies from 'react-cookies';
 
 import styles from '../styles/PoliceComplaintUser.module.css';
 
 const PoliceComplaintUser = ({ userId, username }) => {
     let [user, setUser] = useState({
-        id: '123456',
-        name: 'Megha Agarwal',
-        email: 'ma715@snu.edu.in',
-        phoneNumber: '9876543210',
-        address: 'Shiv Nadar University, Dadri - 201314, Uttar Pradesh',
-        aadhar: '405019181723',
+        _id: '',
+        name: '',
+        email: '',
+        phone_number: '',
+        residence_area: '',
+        aadhaar: '',
+        gender: '',
     });
+
+    const getUserData = async () => {
+        let authToken = cookies.load('firetoken');
+
+        fetch(`${process.env.NEXT_PUBLIC_API}/user/${userId}`, {
+            headers: {
+                Authorization: `Bearer ${authToken}`,
+            },
+        })
+            .then(async (r) => {
+                const response = await r.json();
+                setUser(response);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
+    };
+
+    useEffect(() => {
+        getUserData();
+    }, []);
 
     return (
         <Popup
@@ -67,7 +90,7 @@ const PoliceComplaintUser = ({ userId, username }) => {
                             <span className='foreground-primary bold-text'>
                                 Phone Number:{' '}
                             </span>{' '}
-                            {user.phoneNumber}
+                            {user.phone_number}
                         </p>
                         <p
                             className={`${styles.userData} background-white-translucent foreground-white`}
@@ -75,7 +98,7 @@ const PoliceComplaintUser = ({ userId, username }) => {
                             <span className='foreground-primary bold-text'>
                                 Address:{' '}
                             </span>{' '}
-                            {user.address}
+                            {user.residence_area}
                         </p>
                         <p
                             className={`${styles.userData} background-white-translucent foreground-white`}
@@ -83,7 +106,15 @@ const PoliceComplaintUser = ({ userId, username }) => {
                             <span className='foreground-primary bold-text'>
                                 Aadhar:{' '}
                             </span>{' '}
-                            {user.aadhar}
+                            {user.aadhaar}
+                        </p>
+                        <p
+                            className={`${styles.userData} background-white-translucent foreground-white`}
+                        >
+                            <span className='foreground-primary bold-text'>
+                                Gender:{' '}
+                            </span>{' '}
+                            {user.gender}
                         </p>
                     </div>
                 </div>
