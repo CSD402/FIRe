@@ -43,6 +43,10 @@ export const ComplaintSchema = new mongoose.Schema(
       required: true,
       immutable: true,
     },
+    filed_by_name: {
+      type: String,
+      required: true,
+    },
     status: {
       type: String,
       required: true,

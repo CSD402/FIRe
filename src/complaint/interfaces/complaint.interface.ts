@@ -13,5 +13,6 @@ export interface Complaint {
   status: string;
   date_time_of_incident: string;
   officer_name: String;
+  filed_by_name: String;
   officer_phone: Number;
 }

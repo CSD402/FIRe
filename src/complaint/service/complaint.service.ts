@@ -34,6 +34,7 @@ export class ComplaintService {
       var newComplaint = new this.compaintModel({
         ...complaint,
         filed_by: userData.user._id,
+        filed_by_name: userData.user.name,
       });
       return await newComplaint.save();
     } catch (error) {
