@@ -37,7 +37,7 @@ export class TranslateController {
 
   @Get('/vis-data')
   @Header('Content-Type', 'application/json; charset=utf-8')
-  async getTimeSeriesOriginal(): Promise<String> {
+  async getData(): Promise<String> {
     const file = await readFileSync('data.json', 'utf-8');
 
     return file;
