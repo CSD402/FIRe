@@ -18,4 +18,11 @@ export class TranslateController {
 
     return file;
   }
-}
+
+  @Get('/time-series')
+  @Header('Content-Type', 'application/json; charset=utf-8')
+  async getTimeSeries(): Promise<String> {
+    const file = await readFileSync('timeseries.json', 'utf-8');
+
+    return file;
+  }}
