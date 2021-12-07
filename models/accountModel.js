@@ -17,7 +17,8 @@ export default {
     police_data: {},
 
     // THUNKS
-    policeLogin: thunk(async (actions, data) => {
+    policeLogin: thunk(async (actions, { data, toggleLoader }) => {
+        toggleLoader(true);
         fetch(`${process.env.NEXT_PUBLIC_API}/police-officer/login`, {
             method: 'POST',
             headers: new Headers({
@@ -48,11 +49,12 @@ export default {
                 actions.logout();
             })
             .finally(() => {
-                // toggleLoader(false);
+                toggleLoader(false);
             });
     }),
 
-    clientLogin: thunk(async (actions, data) => {
+    clientLogin: thunk(async (actions, { data, toggleLoader }) => {
+        toggleLoader(true);
         fetch(`${process.env.NEXT_PUBLIC_API}/user/login/`, {
             method: 'POST',
             headers: new Headers({
@@ -77,15 +79,16 @@ export default {
             })
             .catch((e) => {
                 toast.error('Internal Server Error');
-                // console.log(e);
+                console.log(e);
                 actions.logout();
             })
             .finally(() => {
-                // toggleLoader(false);
+                toggleLoader(false);
             });
     }),
 
-    clientRegister: thunk(async (actions, data) => {
+    clientRegister: thunk(async (actions, { data, toggleLoader }) => {
+        toggleLoader(true);
         fetch(`${process.env.NEXT_PUBLIC_API}/user`, {
             method: 'POST',
             headers: new Headers({
@@ -117,7 +120,7 @@ export default {
                 actions.logout();
             })
             .finally(() => {
-                // toggleLoader(false);
+                toggleLoader(false);
             });
     }),
 

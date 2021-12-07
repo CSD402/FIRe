@@ -5,10 +5,13 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-toastify';
 import cookies from 'react-cookies';
 import { useRouter } from 'next/router';
+import { useStoreActions } from 'easy-peasy';
 
 import styles from '../styles/PoliceComplaintUser.module.css';
 
 const FileFIR = ({ complaintId, status, firFiledBy, firId }) => {
+    const { toggleLoader } = useStoreActions((actions) => actions.loaderModel);
+
     const router = useRouter();
 
     const commentsRef = useRef();
@@ -23,6 +26,7 @@ const FileFIR = ({ complaintId, status, firFiledBy, firId }) => {
         const authToken = cookies.load('firetoken');
 
         if (status === 'FIR Lodged') {
+            toggleLoader(true);
             fetch(`${process.env.NEXT_PUBLIC_API}/fir/${firId}`, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
@@ -33,7 +37,8 @@ const FileFIR = ({ complaintId, status, firFiledBy, firId }) => {
                     console.log(response);
                     setFir(response);
                 })
-                .catch((e) => console.log(e));
+                .catch((e) => console.log(e))
+                .finally(() => toggleLoader(false));
         }
     };
 
@@ -51,8 +56,7 @@ const FileFIR = ({ complaintId, status, firFiledBy, firId }) => {
             comments: commentsRef.current.value,
         };
 
-        console.log(data);
-
+        toggleLoader(true);
         fetch(`${process.env.NEXT_PUBLIC_API}/fir`, {
             method: 'POST',
             headers: {
@@ -69,7 +73,8 @@ const FileFIR = ({ complaintId, status, firFiledBy, firId }) => {
                     router.reload();
                 }
             })
-            .catch((e) => console.log(e));
+            .catch((e) => console.log(e))
+            .finally(() => toggleLoader(false));
     };
 
     return (

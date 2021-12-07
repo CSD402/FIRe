@@ -5,10 +5,14 @@ import Select from '../../components/Select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import cookies from 'react-cookies';
+import { useStoreActions } from 'easy-peasy';
 
 import styles from '../../styles/ReviewComplaints.module.css';
+import { toast } from 'react-toastify';
 
 const ReviewComplaints = () => {
+    const { toggleLoader } = useStoreActions((actions) => actions.loaderModel);
+
     let dateInput = useRef();
     let submitRef = useRef();
 
@@ -53,6 +57,7 @@ const ReviewComplaints = () => {
     const getComplaints = async () => {
         const authToken = cookies.load('firetoken');
 
+        toggleLoader(true);
         fetch(`${process.env.NEXT_PUBLIC_API}/complaint`, {
             headers: {
                 'Content-Type': 'application/json',
@@ -67,7 +72,9 @@ const ReviewComplaints = () => {
             })
             .catch((e) => {
                 console.log(e);
-            });
+                toast.error(e);
+            })
+            .finally(() => toggleLoader(false));
     };
 
     useEffect(() => {

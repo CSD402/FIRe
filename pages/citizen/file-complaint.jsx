@@ -3,11 +3,14 @@ import cookies from 'react-cookies';
 import CustomBackground from '../../components/CustomBackground';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
+import { useStoreActions } from 'easy-peasy';
 
-import styles from '../../styles/FileComplaint.module.css';
 import Select from '../../components/Select';
+import styles from '../../styles/FileComplaint.module.css';
 
 const FileComplaint = () => {
+    const { toggleLoader } = useStoreActions((actions) => actions.loaderModel);
+
     let router = useRouter();
 
     let place_of_incidentRef = useRef();
@@ -35,6 +38,7 @@ const FileComplaint = () => {
         };
         let authToken = cookies.load('firetoken');
 
+        toggleLoader(true);
         await fetch(`${process.env.NEXT_PUBLIC_API}/complaint`, {
             method: 'POST',
             headers: {
@@ -52,7 +56,9 @@ const FileComplaint = () => {
             })
             .catch((e) => {
                 console.log('Error =>', e);
-            });
+                toast.error(e);
+            })
+            .finally(() => toggleLoader(false));
     };
 
     return (

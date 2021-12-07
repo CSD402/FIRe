@@ -8,7 +8,7 @@ const Loader = () => {
     );
 
     return (
-        <div id={styles.box} className={loader_shown ? 'shown' : ''}>
+        <div id={styles.box} className={loader_shown ? styles.shown : ''}>
             <svg className={styles.svg}>
                 <filter id='glowfloxs'>
                     <feGaussianBlur in='SourceGraphic' stdDeviation='10' />

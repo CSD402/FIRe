@@ -22,6 +22,7 @@ const DesignSide = () => {
 
 const LoginSide = () => {
     const { policeLogin } = useStoreActions((actions) => actions.accountModel);
+    const { toggleLoader } = useStoreActions((actions) => actions.loaderModel);
 
     const {
         register,
@@ -30,7 +31,7 @@ const LoginSide = () => {
     } = useForm();
 
     const onSubmit = async (data) => {
-        policeLogin(data);
+        policeLogin({ data, toggleLoader });
     };
 
     const [showPass, setShowPass] = useState(false);

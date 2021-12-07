@@ -28,6 +28,7 @@ const DesignSide = ({ registerActive }) => {
 
 const LoginSide = ({ registerActive, setRegisterActive }) => {
     const { clientLogin } = useStoreActions((actions) => actions.accountModel);
+    const { toggleLoader } = useStoreActions((actions) => actions.loaderModel);
 
     const [showPass, setShowPass] = useState(false);
 
@@ -38,7 +39,7 @@ const LoginSide = ({ registerActive, setRegisterActive }) => {
     } = useForm();
 
     const onSubmit = (data) => {
-        clientLogin(data);
+        clientLogin({ data, toggleLoader });
     };
 
     return (
@@ -128,6 +129,7 @@ const RegisterSide = ({ registerActive, setRegisterActive }) => {
     const { clientRegister } = useStoreActions(
         (actions) => actions.accountModel,
     );
+    const { toggleLoader } = useStoreActions((actions) => actions.loaderModel);
 
     const [showPass, setShowPass] = useState(false);
 
@@ -141,7 +143,7 @@ const RegisterSide = ({ registerActive, setRegisterActive }) => {
 
     const onSubmit = (data) => {
         let newUser = { ...data, gender: gender.value };
-        clientRegister(newUser);
+        clientRegister({ data: newUser, toggleLoader });
     };
 
     return (

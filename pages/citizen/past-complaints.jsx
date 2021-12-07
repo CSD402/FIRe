@@ -5,70 +5,12 @@ import CitizenComplaint from '../../components/CitizenComplaint';
 import Select from '../../components/Select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { useStoreActions } from 'easy-peasy';
 
 import styles from '../../styles/PastComplaints.module.css';
 
 const PastComplaints = () => {
-    // let defaultComplaints = [
-    //     {
-    //         date: '2021-11-15T01:55',
-    //         pinCode: '201314',
-    //         id: '123456',
-    //         place_of_incident: 'Dadri',
-    //         slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    //         details:
-    //             'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad minus laboriosam debitis corporis hic rerum eligendi quae quasi beatae eaque excepturi asperiores a dolorum labore repudiandae assumenda eveniet quibusdam optio consequuntur voluptatum explicabo voluptates, rem alias et? Provident, non earum!',
-    //         suspects:
-    //             'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id perferendis, ratione nesciunt voluptatem tempora suscipit corrupti quas eaque alias ea ex quisquam dolore totam a et dicta repudiandae saepe earum dolor adipisci similique doloremque pariatur.',
-    //         type: 'Dowry',
-    //         status: 'Under Review',
-    //     },
-    //     {
-    //         date: '2021-11-19T01:55',
-    //         pinCode: '201314',
-    //         id: '123457',
-    //         place_of_incident: 'Sarita Vihar',
-    //         slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    //         type: 'Rape',
-    //         status: 'Under Review',
-    //     },
-    //     {
-    //         date: '2021-11-19T01:55',
-    //         pinCode: '201314',
-    //         id: '123458',
-    //         place_of_incident: 'Hapur',
-    //         slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    //         type: 'Dowry',
-    //         status: 'Under Review',
-    //     },
-    //     {
-    //         date: '2021-11-19T01:55',
-    //         pinCode: '201314',
-    //         id: '123459',
-    //         place_of_incident: 'Hapur',
-    //         slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    //         type: 'Dowry',
-    //         status: 'Under Review',
-    //     },
-    //     {
-    //         date: '2021-11-10T01:55',
-    //         pinCode: '201314',
-    //         id: '123450',
-    //         place_of_incident: 'Sarita Vihar',
-    //         slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    //         type: 'Dowry',
-    //         status: 'Under Review',
-    //     },
-    //     {
-    //         date: '2021-11-19T01:55',
-    //         pinCode: '201314',
-    //         id: '123451',
-    //         place_of_incident: 'Sarita Vihar',
-    //         slug: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-    //         type: 'Dowry',
-    //         status: 'Under Review',
-    //     },
-    // ];
+    const { toggleLoader } = useStoreActions((actions) => actions.loaderModel);
 
     let dateInput = useRef();
     let submitRef = useRef();
@@ -85,6 +27,7 @@ const PastComplaints = () => {
     const getComplaints = async () => {
         const authToken = cookies.load('firetoken');
 
+        toggleLoader(true);
         fetch(`${process.env.NEXT_PUBLIC_API}/complaint`, {
             headers: {
                 'Content-Type': 'application/json',
@@ -99,7 +42,8 @@ const PastComplaints = () => {
             })
             .catch((e) => {
                 console.log(e);
-            });
+            })
+            .finally(() => toggleLoader(false));
     };
 
     useEffect(() => {
