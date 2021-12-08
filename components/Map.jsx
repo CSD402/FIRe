@@ -68,6 +68,8 @@ function MapExplorer({
     const mapExplorerRef = useRef();
     const { width } = useWindowSize();
 
+    const tooltipData = ['Harassment', 'Active Cases', 'Cyber Crime', 'Rape'];
+
     const [isPerLakh, setIsPerLakh] = useSessionStorage('isPerLakhMap', false);
     const [delta7Mode, setDelta7Mode] = useSessionStorage(
         'delta7ModeMap',
@@ -383,9 +385,9 @@ function MapExplorer({
                     </div>
 
                     <div className='switch-statistic fadeInUp' style={trail[5]}>
-                        {mapStatistics.map((statistic) => (
+                        {mapStatistics.map((statistic, index) => (
                             <Tooltip
-                                message={capitalize(statistic)}
+                                message={capitalize(tooltipData[index])}
                                 key={statistic}
                             >
                                 <div
