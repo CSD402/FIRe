@@ -5,9 +5,10 @@ import { useState, useEffect } from 'react';
 import { useStoreState, useStoreActions, action } from 'easy-peasy';
 
 import CustomerCarePopup from '../components/CustomerCarePopup';
+import CustomBackground from '../components/CustomBackground';
+import Map from '../components/Map';
 
 import styles from '../styles/Home.module.css';
-import CustomBackground from '../components/CustomBackground';
 
 const LoggedOutHome = () => {
     return (
@@ -188,7 +189,7 @@ const Home = () => {
                 ) : (
                     <LoggedOutHome />
                 )}
-                {loginType === 2 ? <></> : <div className={styles.map}></div>}
+                {loginType === 2 ? <></> : <Map />}
             </div>
         </>
     );

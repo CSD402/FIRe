@@ -7,6 +7,9 @@ import { ToastContainer } from 'react-toastify';
 
 import 'reactjs-popup/dist/index.css';
 import 'react-toastify/dist/ReactToastify.css';
+import 'tippy.js/dist/tippy.css';
+import 'tippy.js/animations/shift-away.css';
+import '../styles/map.css';
 import '../styles/globals.css';
 import '../styles/google-translate.css';
 
