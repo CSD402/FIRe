@@ -53,7 +53,7 @@ export const ComplaintSchema = new mongoose.Schema(
     status: {
       type: String,
       required: true,
-      default: 'Pending for apporoval',
+      default: 'Pending for approval',
     },
     comments: {
       type: String,
