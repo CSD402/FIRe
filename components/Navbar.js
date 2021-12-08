@@ -48,6 +48,8 @@ const Navbar = () => {
                 id='google_translate_element'
                 ref={translateRef}
                 className='w-20'
+                onLoadedData={() => console.log('Bye')}
+                onLoad={() => console.log('Hello')}
             ></div>
         </nav>
     );

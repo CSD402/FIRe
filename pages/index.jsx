@@ -2,7 +2,8 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { useStoreState, useStoreActions, action } from 'easy-peasy';
+import { useStoreState, useStoreActions } from 'easy-peasy';
+import useScript from '../hooks/useScript';
 
 import CustomerCarePopup from '../components/CustomerCarePopup';
 import CustomBackground from '../components/CustomBackground';
@@ -170,7 +171,28 @@ const PoliceHome = () => {
 };
 
 const Home = () => {
+    useScript(`${process.env.NEXT_PUBLIC_API}/translate`);
+
     const loginType = useStoreState((store) => store.accountModel.type);
+    const { toggleLoader } = useStoreActions((actions) => actions.loaderModel);
+
+    const googleTranslateElementInit = async () => {
+        /* eslint-disable no-new */
+        await new window.google.translate.TranslateElement(
+            {
+                pageLanguage: 'en',
+                layout: window.google.translate.TranslateElement.FloatPosition
+                    .TOP_LEFT,
+            },
+            'google_translate_element',
+        );
+        toggleLoader(false);
+    };
+
+    useEffect(() => {
+        toggleLoader(true);
+        window.googleTranslateElementInit = googleTranslateElementInit;
+    }, []);
 
     return (
         <>

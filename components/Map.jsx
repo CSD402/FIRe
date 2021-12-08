@@ -565,7 +565,7 @@ const Map = () => {
         <div className={`${styles.map}`}>
             <header>
                 <p className='foreground-primary'>
-                    Last Updated on 01 Nov, 11:20 AM IST
+                    Last Updated on 01 December, 11:20 AM IST
                 </p>
             </header>
             <div className={`${styles.mapFigure} w-100`}>
