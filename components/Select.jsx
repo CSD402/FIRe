@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { ArrowDownIcon } from '@primer/octicons-react';
 import { faSortDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -55,7 +56,16 @@ const Select = ({
                     </div>
                 ))}
             </div>
-            <FontAwesomeIcon icon={faSortDown} className={styles.selectIcon} />
+            <ArrowDownIcon
+                size='30'
+                fill='#fff'
+                className={styles.selectIcon}
+            />
+            {/* <FontAwesomeIcon
+                size='10x'
+                icon={faSortDown}
+                className={styles.selectIcon}
+            /> */}
         </div>
     );
 };
