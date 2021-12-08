@@ -229,8 +229,7 @@ export const MAP_TYPES = {
     STATE: 1,
 };
 
-export const MAPS_DIR =
-    process.env.NODE_ENV === 'production' ? '/mini_maps' : '/projected_maps';
+export const MAPS_DIR = '/projected_maps';
 
 export const MAP_META = {
     AP: {
