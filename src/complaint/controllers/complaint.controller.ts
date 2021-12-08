@@ -20,10 +20,10 @@ import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 export class ComplaintController {
   constructor(private complaintService: ComplaintService) {}
 
-  // @Get()
-  // public async getComplaint(): Promise<Complaint[]> {
-  //   return this.complaintService.getComplaint();
-  // }
+  @Get('/count')
+  public async getComplaintCount(): Promise<Number> {
+    return this.complaintService.getComplaintCount();
+  }
 
   @UseGuards(JwtAuthGuard)
   @Post()

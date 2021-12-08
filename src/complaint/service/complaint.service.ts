@@ -15,13 +15,15 @@ export class ComplaintService {
     @InjectModel('Complaint') private readonly compaintModel: Model<Complaint>,
   ) {}
 
-  // public async getComplaint(): Promise<Complaint[]> {
-  //   try {
-  //     return await this.compaintModel.find();
-  //   } catch (error) {
-  //     return error;
-  //   }
-  // }
+  public async getComplaintCount(): Promise<Number> {
+    try {
+      return await (
+        await this.compaintModel.find()
+      ).length;
+    } catch (error) {
+      return error;
+    }
+  }
 
   public async postComplaint(
     complaint: Complaint,
