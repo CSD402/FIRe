@@ -1,7 +1,8 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useStoreState } from 'easy-peasy';
+import { useState, useEffect } from 'react';
+import { useStoreState, useStoreActions, action } from 'easy-peasy';
 
 import CustomerCarePopup from '../components/CustomerCarePopup';
 
@@ -103,6 +104,29 @@ const SectionButton = ({ heading, data, button }) => {
 };
 
 const PoliceHome = () => {
+    let { toggleLoader } = useStoreActions((actions) => actions.loaderModel);
+
+    const [monthFirs, setMonthsFirs] = useState(269);
+
+    const getFirCount = async () => {
+        toggleLoader(true);
+        fetch(`${process.env.NEXT_PUBLIC_API}/complaint/count`, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(async (r) => {
+                const response = await r.json();
+                setMonthsFirs(response);
+            })
+            .catch((e) => console.log(e))
+            .finally(() => toggleLoader(false));
+    };
+
+    useEffect(() => {
+        getFirCount();
+    }, []);
+
     return (
         <div
             className={`${styles.policeHome} background-white-translucent glass-effect border-radius-15`}
@@ -119,7 +143,7 @@ const PoliceHome = () => {
                 <SectionButton heading='Active FIRS' data={<span>6723</span>} />
                 <SectionButton
                     heading='FIRs this month'
-                    data={<span>269</span>}
+                    data={<span>{monthFirs}</span>}
                 />
                 <SectionButton
                     heading='Data Analytics'

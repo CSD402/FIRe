@@ -30,8 +30,6 @@ export default {
             .then(async (resp) => {
                 const res = await resp.json();
 
-                console.log(resp);
-
                 if (resp.status === 201) {
                     actions.setToken(res.bearer);
 
