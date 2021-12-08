@@ -2,18 +2,11 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useStoreState, useStoreActions } from 'easy-peasy';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLanguage } from '@fortawesome/free-solid-svg-icons';
 
 import styles from '../styles/Navbar.module.css';
 
 const Navbar = () => {
     let translateRef = useRef();
-
-    const [mounted, setMounted] = useState(false);
-    useEffect(() => {
-        setMounted(true);
-    }, []);
 
     const loginType = useStoreState((store) => store.accountModel.type);
     const logout = useStoreActions((actions) => actions.accountModel.logout);
@@ -30,9 +23,6 @@ const Navbar = () => {
                     />
                     FIRe
                 </a>
-            </Link>
-            <Link href='/features'>
-                <a className={styles.navLink}>Features</a>
             </Link>
             <Link href='/about'>
                 <a className={styles.navLink}>About Us</a>
