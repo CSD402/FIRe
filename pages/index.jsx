@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useStoreState } from 'easy-peasy';
 
 import CustomerCarePopup from '../components/CustomerCarePopup';
@@ -70,9 +71,25 @@ const CitizenHome = () => {
     );
 };
 
-const SectionButton = ({ heading, data }) => {
-    return (
-        <div className={`${styles.sectionButton}`}>
+const SectionButton = ({ heading, data, button }) => {
+    return button ? (
+        <Link href='https://fire-data-vis.vercel.app/'>
+            <a
+                className={`${styles.sectionButton} ${styles.sectionLink} w-100`}
+                target='_blank'
+            >
+                <h1 className='heading-text foreground-dark center-text'>
+                    {heading}
+                </h1>
+                <div
+                    className={`heading-text background-primary foreground-white border-radius-15 center-text ${styles.sectionData}`}
+                >
+                    {data}
+                </div>
+            </a>
+        </Link>
+    ) : (
+        <div className={`${styles.sectionButton} w-45`}>
             <h1 className='heading-text foreground-dark center-text'>
                 {heading}
             </h1>
@@ -114,6 +131,7 @@ const PoliceHome = () => {
                             alt='DATA'
                         />
                     }
+                    button={true}
                 />
             </div>
             <a
