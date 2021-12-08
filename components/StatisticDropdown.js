@@ -74,6 +74,7 @@ const StatisticDropdown = ({
                 <TriangleRightIcon size={20} />
             </div>
             <select
+                suppressHydrationWarning={true}
                 ref={selectRef}
                 value={currentStatistic}
                 className={`${classnames(

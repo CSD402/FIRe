@@ -238,6 +238,7 @@ function MapExplorer({
 
     return (
         <div
+            suppressHydrationWarning={true}
             className={classnames(
                 'MapExplorer',
                 { stickied },
@@ -274,6 +275,7 @@ function MapExplorer({
                         style={{
                             color: zoneColor || statisticConfig?.color,
                         }}
+                        suppressHydrationWarning={true}
                     >
                         {hoveredRegion.name}
                         {hoveredRegion.name === UNKNOWN_DISTRICT_KEY &&
@@ -289,8 +291,9 @@ function MapExplorer({
                             style={{
                                 color: zoneColor || statisticConfig?.color,
                             }}
+                            suppressHydrationWarning={true}
                         >
-                            <animated.div>
+                            <animated.div suppressHydrationWarning={true}>
                                 {spring.total.to((total) =>
                                     !noRegionHighlightedDistrictData ||
                                     !statisticConfig?.hasPrimary
@@ -322,10 +325,12 @@ function MapExplorer({
 
                 <div
                     className={classnames('panel-right', `is-${mapStatistic}`)}
+                    suppressHydrationWarning={true}
                 >
                     <div className='switch-type'>
                         <Tooltip message={'Last 7 day values'} hold>
                             <div
+                                suppressHydrationWarning={true}
                                 className={classnames('toggle', 'fadeInUp', {
                                     'is-highlighted':
                                         (delta7Mode &&
@@ -352,6 +357,7 @@ function MapExplorer({
                                 })}
                                 onClick={handlePerLakhClick}
                                 style={trail[2]}
+                                suppressHydrationWarning={true}
                             >
                                 <PerLakhIcon />
                             </div>
@@ -377,6 +383,7 @@ function MapExplorer({
                                     )}
                                     onClick={handleDistrictClick}
                                     style={trail[3]}
+                                    suppressHydrationWarning={true}
                                 >
                                     <OrganizationIcon />
                                 </div>
@@ -404,6 +411,7 @@ function MapExplorer({
                                         this,
                                         statistic,
                                     )}
+                                    suppressHydrationWarning={true}
                                 >
                                     <DotFillIcon />
                                 </div>
