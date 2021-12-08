@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import { useStoreActions, useStoreState } from 'easy-peasy';
 import { useForm } from 'react-hook-form';
@@ -120,13 +121,23 @@ const Login = () => {
     }, [logged_in]);
 
     return (
-        <div id={styles.authPage}>
-            <div id={styles.login} className='border-radius-15 glass-effect'>
-                <section id={styles.registerSide}></section>
-                <DesignSide />
-                <LoginSide />
+        <>
+            <Head>
+                <title>FIRe | Police Official Login</title>
+                <meta name='keywords' content='e-fir' />
+                <link rel='shortcut icon' href='/logo.svg' />
+            </Head>
+            <div id={styles.authPage}>
+                <div
+                    id={styles.login}
+                    className='border-radius-15 glass-effect'
+                >
+                    <section id={styles.registerSide}></section>
+                    <DesignSide />
+                    <LoginSide />
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

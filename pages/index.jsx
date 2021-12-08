@@ -43,34 +43,40 @@ const CitizenHome = () => {
     let { client_data } = useStoreState((store) => store.accountModel);
 
     return (
-        <div className={styles.direction}>
-            <Image
-                src='/images/shield.png'
-                height={175}
-                width={175}
-                alt='Shield'
-            />
-            <h1 className='heading-text foreground-white center-text'>
-                Welcome, {client_data.name}
-            </h1>
-            <a
-                href='/citizen/file-complaint'
-                className='btn-pulse border-radius-10 background-primary foreground-white'
-            >
-                File Complaint
-            </a>
-
-            {/* <button className='btn-pulse border-radius-10 background-primary foreground-white'>
-                Customer Care
-            </button> */}
-            <CustomerCarePopup />
-            <a
-                href='/citizen/past-complaints'
-                className='btn-pulse border-radius-10 background-primary foreground-white'
-            >
-                Past Complaints
-            </a>
-        </div>
+        <>
+            <Head>
+                <title>FIRe | Citizen Home</title>
+                <meta name='keywords' content='e-fir' />
+                <link rel='shortcut icon' href='/logo.svg' />
+            </Head>
+            <div className={styles.direction}>
+                <Image
+                    src='/images/shield.png'
+                    height={175}
+                    width={175}
+                    alt='Shield'
+                />
+                <h1 className='heading-text foreground-white center-text'>
+                    Welcome, {client_data.name}
+                </h1>
+                <a
+                    href='/citizen/file-complaint'
+                    className='btn-pulse border-radius-10 background-primary foreground-white'
+                >
+                    File Complaint
+                </a>
+                {/* <button className='btn-pulse border-radius-10 background-primary foreground-white'>
+                    Customer Care
+                </button> */}
+                <CustomerCarePopup />
+                <a
+                    href='/citizen/past-complaints'
+                    className='btn-pulse border-radius-10 background-primary foreground-white'
+                >
+                    Past Complaints
+                </a>
+            </div>
+        </>
     );
 };
 
@@ -130,43 +136,53 @@ const PoliceHome = () => {
     }, []);
 
     return (
-        <div
-            className={`${styles.policeHome} background-white-translucent glass-effect border-radius-15`}
-        >
-            <div className={`${styles.policeIntro}`}>
-                <h1 className='heading-text foreground-dark'>
-                    Welcome, {'Rakesh Kumar'}
-                </h1>
-                <h1 className='subheading-text foreground-dark'>
-                    {'Sub-Inspector'}
-                </h1>
-            </div>
-            <div className={`${styles.policeSections}`}>
-                <SectionButton heading='Active FIRS' data={<span>6723</span>} />
-                <SectionButton
-                    heading='FIRs this month'
-                    data={<span>{monthFirs}</span>}
-                />
-                <SectionButton
-                    heading='Data Analytics'
-                    data={
-                        <Image
-                            src='/images/chart.png'
-                            height={325}
-                            width={525}
-                            alt='DATA'
-                        />
-                    }
-                    button={true}
-                />
-            </div>
-            <a
-                href='/police/review-complaints'
-                className={`submit-button dark heading-text w-75 border-radius-15 ${styles.policeHomeButton}`}
+        <>
+            <Head>
+                <title>FIRe | Police Official Home</title>
+                <meta name='keywords' content='e-fir' />
+                <link rel='shortcut icon' href='/logo.svg' />
+            </Head>
+            <div
+                className={`${styles.policeHome} background-white-translucent glass-effect border-radius-15`}
             >
-                REVIEW COMPLAINTS
-            </a>
-        </div>
+                <div className={`${styles.policeIntro}`}>
+                    <h1 className='heading-text foreground-dark'>
+                        Welcome, {'Rakesh Kumar'}
+                    </h1>
+                    <h1 className='subheading-text foreground-dark'>
+                        {'Sub-Inspector'}
+                    </h1>
+                </div>
+                <div className={`${styles.policeSections}`}>
+                    <SectionButton
+                        heading='Active FIRS'
+                        data={<span>6723</span>}
+                    />
+                    <SectionButton
+                        heading='FIRs this month'
+                        data={<span>{monthFirs}</span>}
+                    />
+                    <SectionButton
+                        heading='Data Analytics'
+                        data={
+                            <Image
+                                src='/images/chart.png'
+                                height={325}
+                                width={525}
+                                alt='DATA'
+                            />
+                        }
+                        button={true}
+                    />
+                </div>
+                <a
+                    href='/police/review-complaints'
+                    className={`submit-button dark heading-text w-75 border-radius-15 ${styles.policeHomeButton}`}
+                >
+                    REVIEW COMPLAINTS
+                </a>
+            </div>
+        </>
     );
 };
 

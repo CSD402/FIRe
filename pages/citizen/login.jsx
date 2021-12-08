@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useStoreState, useStoreActions } from 'easy-peasy';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import Select from '../../components/Select';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
@@ -276,19 +277,29 @@ const Login = () => {
     }, [logged_in]);
 
     return (
-        <div id={styles.authPage}>
-            <div id={styles.login} className='border-radius-15 glass-effect'>
-                <RegisterSide
-                    registerActive={registerActive}
-                    setRegisterActive={setRegisterActive}
-                />
-                <DesignSide registerActive={registerActive} />
-                <LoginSide
-                    registerActive={registerActive}
-                    setRegisterActive={setRegisterActive}
-                />
+        <>
+            <Head>
+                <title>FIRe | Citizen Login</title>
+                <meta name='keywords' content='e-fir' />
+                <link rel='shortcut icon' href='/logo.svg' />
+            </Head>
+            <div id={styles.authPage}>
+                <div
+                    id={styles.login}
+                    className='border-radius-15 glass-effect'
+                >
+                    <RegisterSide
+                        registerActive={registerActive}
+                        setRegisterActive={setRegisterActive}
+                    />
+                    <DesignSide registerActive={registerActive} />
+                    <LoginSide
+                        registerActive={registerActive}
+                        setRegisterActive={setRegisterActive}
+                    />
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

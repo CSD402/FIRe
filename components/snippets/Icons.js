@@ -10,7 +10,7 @@ export const Delta7Icon = () => (
 export const PerLakhIcon = () => (
     <div className='Icons'>
         <PeopleIcon size={16} fill='#fff' />
-        <spann className='foreground-white'>1L</spann>
+        <span className='foreground-white'>1L</span>
     </div>
 );
 
