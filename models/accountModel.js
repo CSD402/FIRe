@@ -87,6 +87,7 @@ export default {
 
     clientRegister: thunk(async (actions, { data, toggleLoader }) => {
         toggleLoader(true);
+        console.log(data);
         fetch(`${process.env.NEXT_PUBLIC_API}/user`, {
             method: 'POST',
             headers: new Headers({
