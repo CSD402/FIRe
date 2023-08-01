@@ -4722,14 +4722,14 @@ this.default_tr = this.default_tr || {};
     c._pli = b + staticPath + 'img/loading.gif';
     c._ps = b + staticPath + 'css/translateelement.css';
     // c._plla = 'translate-pa.googleapis.com' + '/v1/supportedLanguages';
-    c._plla = '/languages';
+    c._plla = `${process.env.API}/languages`;
     c._puh = 'translate.google.com';
     c._cnal = {};
     _loadCss(c._ps);
     // _loadJs(
     //   'https://translate.googleapis.com/_/translate_http/_/js/k\x3dtranslate_http.tr.en_GB.yS2RBbvhaI8.O/am\x3dAQ/d\x3d1/exm\x3del_conf/ed\x3d1/rs\x3dAN8SPfrYsngvo23ERfcmJ_Hyiu3IZAoiqA/m\x3del_main',
     // );
-    _loadJs('/translate/main');
+    _loadJs(`${process.env.API}/translate/main`);
     _exportMessages();
     _exportVersion('TE_20211201');
   })();
