@@ -4689,7 +4689,7 @@ this.default_tr = this.default_tr || {};
   } catch (e) {
     _._DumpException(e);
   }
-}.call(this, this.default_tr));
+}).call(this, this.default_tr);
 // Google Inc.
 
 //# sourceURL=/_/translate_http/_/js/k=translate_http.tr.en_GB.yS2RBbvhaI8.O/d=1/rs=AN8SPfr561qjCIH5LASh22-NPRoGYhHCfQ/m=el_conf
@@ -4722,14 +4722,14 @@ this.default_tr = this.default_tr || {};
     c._pli = b + staticPath + 'img/loading.gif';
     c._ps = b + staticPath + 'css/translateelement.css';
     // c._plla = 'translate-pa.googleapis.com' + '/v1/supportedLanguages';
-    c._plla = 'fir-e-server.herokuapp.com/languages';
+    c._plla = '/languages';
     c._puh = 'translate.google.com';
     c._cnal = {};
     _loadCss(c._ps);
     // _loadJs(
     //   'https://translate.googleapis.com/_/translate_http/_/js/k\x3dtranslate_http.tr.en_GB.yS2RBbvhaI8.O/am\x3dAQ/d\x3d1/exm\x3del_conf/ed\x3d1/rs\x3dAN8SPfrYsngvo23ERfcmJ_Hyiu3IZAoiqA/m\x3del_main',
     // );
-    _loadJs('https://fir-e-server.herokuapp.com/translate/main');
+    _loadJs('/translate/main');
     _exportMessages();
     _exportVersion('TE_20211201');
   })();
