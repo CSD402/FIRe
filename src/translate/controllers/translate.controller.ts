@@ -11,13 +11,13 @@ export class TranslateController {
     return file;
   }
 
-  @Get('/main')
-  @Header('Content-Type', 'text/javascript; charset=utf-8')
-  async getMain(): Promise<String> {
-    const file = await readFileSync('translateMain.js', 'utf-8');
+  // @Get('/main')
+  // @Header('Content-Type', 'text/javascript; charset=utf-8')
+  // async getMain(): Promise<String> {
+  //   const file = await readFileSync('translateMain.js', 'utf-8');
 
-    return file;
-  }
+  //   return file;
+  // }
 
   @Get('/time-series')
   @Header('Content-Type', 'application/json; charset=utf-8')

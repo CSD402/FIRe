@@ -76,6 +76,10 @@ export class UserService {
   public async validateUser(aadhaar: Number, password: string): Promise<User> {
     const user = await this.findByAadhaar(aadhaar);
 
+    if (!user) {
+      throw new UnauthorizedException();
+    }
+
     const res = await this.authService.comparePasswords(
       password,
       user.password,

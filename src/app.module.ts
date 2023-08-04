@@ -7,8 +7,8 @@ import { ComplaintModule } from './complaint/complaint.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import config from './config/keys';
-import { TranslateModule } from './translate/translate.module';
-import { LanguagesModule } from './languages/languages.module';
+// import { TranslateModule } from './translate/translate.module';
+// import { LanguagesModule } from './languages/languages.module';
 
 @Module({
   imports: [
@@ -18,8 +18,8 @@ import { LanguagesModule } from './languages/languages.module';
     FirModule,
     PoliceOfficerModule,
     UserModule,
-    TranslateModule,
-    LanguagesModule,
+    // TranslateModule,
+    // LanguagesModule,
     MongooseModule.forRoot(config.mongoURI),
   ],
 })
