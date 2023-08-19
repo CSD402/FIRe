@@ -69,7 +69,7 @@ const FileFIR = ({ complaintId, status, firFiledBy, firId }) => {
                 const response = await r.json();
                 console.log(response);
                 if (r.status === 201) {
-                    toast.dark('FIR Filed');
+                    toast.success('FIR Filed');
                     router.reload();
                 }
             })

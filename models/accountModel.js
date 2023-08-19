@@ -35,7 +35,7 @@ export default {
 
                     let policeData = jwt_decode(res.bearer);
                     actions.setPoliceData(policeData.officer);
-                    toast.dark('Logged in Successfully!');
+                    toast.success('Logged in Successfully!');
                 } else {
                     toast.error(res.message);
                     actions.logout();
@@ -69,7 +69,7 @@ export default {
 
                     let userData = jwt_decode(res.bearer);
                     actions.setClientData(userData.user);
-                    toast.dark('Logged in Successfully!');
+                    toast.success('Logged in Successfully!');
                 } else {
                     toast.error(res.message);
                     actions.logout();
@@ -106,7 +106,7 @@ export default {
                     let userData = jwt_decode(res.bearer);
                     // console.log(userData);
                     actions.setClientData(userData.user);
-                    toast.dark('Registered in successfully');
+                    toast.success('Registered in successfully');
                 } else {
                     toast.error(res.message);
                     // console.log(res);

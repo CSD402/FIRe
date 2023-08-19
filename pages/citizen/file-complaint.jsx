@@ -55,7 +55,7 @@ const FileComplaint = () => {
                 if (res?.statusCode !== 201) {
                     throw res;
                 }
-                toast.dark('Complaint Filed');
+                toast.success('Complaint Filed');
                 router.push('/citizen/past-complaints');
             })
             .catch((e) => {
