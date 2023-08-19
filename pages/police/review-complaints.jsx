@@ -68,12 +68,15 @@ const ReviewComplaints = () => {
             .then(async (r) => {
                 const response = await r.json();
                 console.log(response);
+                if (response?.statusCode !== 200) {
+                    throw response;
+                }
                 setDefaultComplaints(response);
                 setComplaints(response);
             })
             .catch((e) => {
                 console.log(e);
-                toast.error(e);
+                toast.error(e?.message);
             })
             .finally(() => toggleLoader(false));
     };

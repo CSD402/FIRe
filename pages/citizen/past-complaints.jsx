@@ -9,6 +9,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useStoreActions } from 'easy-peasy';
 
 import styles from '../../styles/PastComplaints.module.css';
+import { toast } from 'react-toastify';
 
 const PastComplaints = () => {
     const { toggleLoader } = useStoreActions((actions) => actions.loaderModel);
@@ -37,12 +38,16 @@ const PastComplaints = () => {
         })
             .then(async (r) => {
                 const response = await r.json();
+                if (response?.statusCode !== 200) {
+                    throw response;
+                }
                 console.log(response);
                 setDefaultComplaints(response);
                 setComplaints(response);
             })
             .catch((e) => {
                 console.log(e);
+                toast.error(e?.message);
             })
             .finally(() => toggleLoader(false));
     };

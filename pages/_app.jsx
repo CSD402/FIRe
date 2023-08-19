@@ -16,7 +16,7 @@ const store = createStore(persist(model, { allow: ['accountModel'] }));
 function MyApp({ Component, pageProps }) {
     return (
         <StoreProvider store={store}>
-            <ToastContainer />
+            <ToastContainer theme='dark' />
             <Layout>
                 <Component {...pageProps} />
             </Layout>

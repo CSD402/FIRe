@@ -40,7 +40,7 @@ const FileComplaint = () => {
         let authToken = cookies.load('firetoken');
 
         toggleLoader(true);
-        await fetch(`${process.env.NEXT_PUBLIC_API}/complaint`, {
+        fetch(`${process.env.NEXT_PUBLIC_API}/complaint`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -52,12 +52,15 @@ const FileComplaint = () => {
                 console.log(resp);
                 const res = await resp.json();
                 console.log(res);
+                if (res?.statusCode !== 201) {
+                    throw res;
+                }
                 toast.dark('Complaint Filed');
                 router.push('/citizen/past-complaints');
             })
             .catch((e) => {
                 console.log('Error =>', e);
-                toast.error(e);
+                toast.error(e?.message);
             })
             .finally(() => toggleLoader(false));
     };
