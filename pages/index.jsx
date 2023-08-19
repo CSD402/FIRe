@@ -187,28 +187,28 @@ const PoliceHome = () => {
 };
 
 const Home = () => {
-    useScript(`${process.env.NEXT_PUBLIC_API}/translate`);
+    // useScript(`${process.env.NEXT_PUBLIC_API}/translate`);
 
     const loginType = useStoreState((store) => store.accountModel.type);
     const { toggleLoader } = useStoreActions((actions) => actions.loaderModel);
 
-    const googleTranslateElementInit = async () => {
-        /* eslint-disable no-new */
-        await new window.google.translate.TranslateElement(
-            {
-                pageLanguage: 'en',
-                layout: window.google.translate.TranslateElement.FloatPosition
-                    .TOP_LEFT,
-            },
-            'google_translate_element',
-        );
-        toggleLoader(false);
-    };
+    // const googleTranslateElementInit = async () => {
+    //     /* eslint-disable no-new */
+    //     await new window.google.translate.TranslateElement(
+    //         {
+    //             pageLanguage: 'en',
+    //             layout: window.google.translate.TranslateElement.FloatPosition
+    //                 .TOP_LEFT,
+    //         },
+    //         'google_translate_element',
+    //     );
+    //     toggleLoader(false);
+    // };
 
-    useEffect(() => {
-        toggleLoader(true);
-        window.googleTranslateElementInit = googleTranslateElementInit;
-    }, []);
+    // useEffect(() => {
+    //     toggleLoader(true);
+    //     window.googleTranslateElementInit = googleTranslateElementInit;
+    // }, []);
 
     return (
         <>
