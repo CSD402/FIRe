@@ -42,7 +42,7 @@ export default {
                 }
             })
             .catch((e) => {
-                toast.error('Internal Server Error');
+                toast.error('Please check your credentials');
                 console.log(e);
                 actions.logout();
             })
@@ -76,7 +76,7 @@ export default {
                 }
             })
             .catch((e) => {
-                toast.error('Internal Server Error');
+                toast.error('Please check your credentials');
                 console.log(e);
                 actions.logout();
             })
