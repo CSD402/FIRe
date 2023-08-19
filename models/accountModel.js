@@ -159,9 +159,7 @@ export default {
 
     // ACTIONS
     setToken: action(async (state, token) => {
-        cookies.save('firetoken', `${token}`, {
-            expires: new Date('03-23-2022'),
-        });
+        cookies.save('firetoken', `${token}`);
         state.token = token;
     }),
     setClientData: action(async (state, data) => {
